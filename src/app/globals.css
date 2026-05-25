@@ -31,7 +31,7 @@
   --color-overlay: var(--overlay);
   
   --font-dohyeon: var(--font-dohyeon), "BMDOHYEON", sans-serif;
-  --font-pretendard: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-pretendard: var(--font-pretendard), "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 body {

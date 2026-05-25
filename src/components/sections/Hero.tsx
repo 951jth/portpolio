@@ -137,10 +137,17 @@ export default function Hero() {
             {/* Main Interactive Card */}
             <div className="bg-surface p-6 sm:p-8 rounded-3xl shadow-xl border border-outer/60 relative overflow-hidden backdrop-blur-sm bg-white/95">
               <div className="absolute top-0 right-0 w-24 h-24 bg-accent-light/30 rounded-bl-full -z-10" />
-              <div className="flex gap-2 mb-6">
-                <span className="w-3 h-3 rounded-full bg-primary/40" />
-                <span className="w-3 h-3 rounded-full bg-secondary/40" />
-                <span className="w-3 h-3 rounded-full bg-accent-deep/40" />
+              <div className="flex justify-between items-center mb-6">
+                <div className="flex gap-2">
+                  <span className="w-3 h-3 rounded-full bg-primary/40" />
+                  <span className="w-3 h-3 rounded-full bg-secondary/40" />
+                  <span className="w-3 h-3 rounded-full bg-accent-deep/40" />
+                </div>
+                <img
+                  src="/assets/images/profile.png"
+                  alt="조세훈 프로필 사진"
+                  className="w-12 h-12 rounded-full object-cover border-2 border-outer shadow-sm"
+                />
               </div>
               <div className="font-dohyeon text-xl text-text mb-2">
                 Sehoon Cho

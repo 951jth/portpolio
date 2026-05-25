@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Do_Hyeon } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
 const doHyeon = Do_Hyeon({
@@ -7,6 +8,12 @@ const doHyeon = Do_Hyeon({
   subsets: ["latin"],
   variable: "--font-dohyeon",
   display: "swap",
+});
+
+const pretendard = localFont({
+  src: "../../public/assets/fonts/PretendardVariable.woff2",
+  display: "swap",
+  variable: "--font-pretendard",
 });
 
 export const metadata: Metadata = {
@@ -28,15 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className={`scroll-smooth ${doHyeon.variable}`}>
-      <head>
-        {/* JSDelivr CDN 사전 연결 및 Pretendard 가변 다이나믹 서브셋 폰트 병렬 로드 */}
-        <link rel="preconnect" href="https://cdn.jsdelivr.net" />
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css"
-        />
-      </head>
+    <html lang="ko" className={`scroll-smooth ${doHyeon.variable} ${pretendard.variable}`}>
       <body className="bg-background text-text font-pretendard min-h-screen">
         {children}
       </body>
