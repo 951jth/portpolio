@@ -144,7 +144,7 @@ export default function Hero() {
                   <span className="w-3 h-3 rounded-full bg-accent-deep/40" />
                 </div>
                 <img
-                  src="/assets/images/profile.png"
+                  src="/assets/images/profile.jpg"
                   alt="조세훈 프로필 사진"
                   className="w-12 h-12 rounded-full object-cover border-2 border-outer shadow-sm"
                 />
