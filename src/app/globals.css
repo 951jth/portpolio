@@ -1,5 +1,3 @@
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css");
-@import url("https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap");
 @import "tailwindcss";
 
 
@@ -32,8 +30,8 @@
   --color-text-secondary: var(--text-secondary);
   --color-overlay: var(--overlay);
   
-  --font-dohyeon: "Do Hyeon", "BMDOHYEON", sans-serif;
-  --font-pretendard: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-dohyeon: var(--font-dohyeon), "BMDOHYEON", sans-serif;
+  --font-pretendard: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 body {

@@ -1,5 +1,13 @@
 import type { Metadata } from "next";
+import { Do_Hyeon } from "next/font/google";
 import "./globals.css";
+
+const doHyeon = Do_Hyeon({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-dohyeon",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "조세훈 | 프론트엔드 엔지니어 포트폴리오",
@@ -20,7 +28,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className="scroll-smooth">
+    <html lang="ko" className={`scroll-smooth ${doHyeon.variable}`}>
+      <head>
+        {/* JSDelivr CDN 사전 연결 및 Pretendard 가변 다이나믹 서브셋 폰트 병렬 로드 */}
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css"
+        />
+      </head>
       <body className="bg-background text-text font-pretendard min-h-screen">
         {children}
       </body>
