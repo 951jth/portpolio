@@ -1,26 +1,63 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css");
+@import url("https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap");
 @import "tailwindcss";
 
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FDFCF0;
+  --outer: #F4F2EB;
+  --surface: #FFFFFF;
+  --primary: #E27D60;
+  --secondary: #859F6D;
+  --accent-deep: #BA4A00;
+  --accent-light: #FADCD0;
+  --text: #4A3B32;
+  --text-secondary: #8B7E74;
+  --overlay: rgba(45, 36, 31, 0.4);
 }
 
-@theme inline {
+@theme {
   --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-outer: var(--outer);
+  --color-surface: var(--surface);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent-deep: var(--accent-deep);
+  --color-accent-light: var(--accent-light);
+  --color-text: var(--text);
+  --color-text-secondary: var(--text-secondary);
+  --color-overlay: var(--overlay);
+  
+  --font-dohyeon: "Do Hyeon", "BMDOHYEON", sans-serif;
+  --font-pretendard: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--background);
+  color: var(--text);
+  font-family: var(--font-pretendard);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-dohyeon);
+  color: var(--text);
+}
+
+/* 커스텀 스크롤바 디자인 */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--outer);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--secondary);
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-deep);
 }
