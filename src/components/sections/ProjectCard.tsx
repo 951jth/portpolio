@@ -25,7 +25,7 @@ export default function ProjectCard({ project }: { project: ProjectItem }) {
         <div>
           {/* Category Label */}
           <div className="flex justify-between items-center mb-4">
-            <span className="text-xs font-semibold text-secondary uppercase tracking-wider bg-outer px-2.5 py-1 rounded-md">
+            <span className="text-xs font-semibold text-secondary bg-secondary/15 uppercase tracking-wider px-2.5 py-1 rounded-md">
               {project.category}
             </span>
             {project.featured && (

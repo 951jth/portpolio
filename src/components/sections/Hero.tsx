@@ -142,9 +142,9 @@ export default function Hero() {
                 <span className="w-3 h-3 rounded-full bg-secondary/40" />
                 <span className="w-3 h-3 rounded-full bg-accent-deep/40" />
               </div>
-              <h3 className="font-dohyeon text-xl text-text mb-2">
+              <div className="font-dohyeon text-xl text-text mb-2">
                 Sehoon Cho
-              </h3>
+              </div>
               <p className="font-pretendard text-text-secondary text-sm mb-4">
                 Frontend Engineer & Performance Optimizer
               </p>
@@ -182,8 +182,8 @@ export default function Hero() {
             yOffset={-15}
             className="absolute top-10 left-4 z-20"
           >
-            <div className="bg-secondary text-white p-3 rounded-2xl shadow-lg border border-white/20 text-xs font-semibold flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-white animate-ping" />
+            <div className="bg-secondary text-secondary-foreground p-3 rounded-2xl shadow-lg border border-secondary-foreground/20 text-xs font-semibold flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-secondary-foreground animate-ping" />
               <span>대용량 최적화 전문</span>
             </div>
           </Float>

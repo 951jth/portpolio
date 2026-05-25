@@ -12,7 +12,7 @@ export default function ExperienceCard({ exp }: { exp: ExperienceItem }) {
   return (
     <div className="relative">
       {/* Timeline Icon Node */}
-      <span className="absolute -left-[38px] md:-left-[54px] top-1.5 flex items-center justify-center bg-secondary text-white w-8 h-8 rounded-full border-4 border-background shadow-sm">
+      <span className="absolute -left-[38px] md:-left-[54px] top-1.5 flex items-center justify-center bg-secondary text-secondary-foreground w-8 h-8 rounded-full border-4 border-background shadow-sm">
         <Briefcase size={14} />
       </span>
 

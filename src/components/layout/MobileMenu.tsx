@@ -43,7 +43,7 @@ export default function MobileMenu({ navLinks }: MobileMenuProps) {
           <a
             href="#contact"
             onClick={() => setIsOpen(false)}
-            className="bg-primary text-white text-center font-semibold py-3 rounded-full hover:bg-accent-deep transition-all mt-2"
+            className="bg-primary text-primary-foreground hover:text-white text-center font-semibold py-3 rounded-full hover:bg-accent-deep transition-all mt-2"
           >
             커피챗 요청하기
           </a>

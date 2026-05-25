@@ -34,9 +34,9 @@ export default function Button({
 
   const variants = {
     primary:
-      "bg-primary text-white hover:bg-accent-deep hover:shadow-lg focus:ring-primary/40",
+      "bg-primary text-primary-foreground hover:bg-accent-deep hover:text-white hover:shadow-lg focus:ring-primary/40",
     secondary:
-      "bg-secondary text-white hover:bg-accent-deep hover:shadow-lg focus:ring-secondary/40",
+      "bg-secondary text-secondary-foreground hover:bg-accent-deep hover:text-white hover:shadow-lg focus:ring-secondary/40",
     accent:
       "bg-accent-light/50 border border-primary/20 text-accent-deep hover:bg-accent-light hover:shadow-md focus:ring-accent-deep/40",
     outline:
