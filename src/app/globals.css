@@ -30,8 +30,8 @@
   --color-text-secondary: var(--text-secondary);
   --color-overlay: var(--overlay);
   
-  --font-dohyeon: var(--font-dohyeon), "BMDOHYEON", sans-serif;
-  --font-pretendard: var(--font-pretendard), "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-dohyeon: var(--font-dohyeon), var(--font-pretendard), "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", sans-serif;
+  --font-pretendard: var(--font-pretendard), -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", sans-serif;
 }
 
 body {

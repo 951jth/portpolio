@@ -1,5 +1,3 @@
-"use client";
-
 import { ReactNode, ComponentPropsWithoutRef } from "react";
 import Link from "next/link";
 

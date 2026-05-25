@@ -1,19 +1,31 @@
 import type { Metadata } from "next";
-import { Do_Hyeon } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 
-const doHyeon = Do_Hyeon({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-dohyeon",
+const pretendard = localFont({
+  src: "../../public/assets/fonts/PretendardVariableSubset.woff2",
   display: "swap",
+  preload: false,
+  variable: "--font-pretendard",
+  fallback: [
+    "Apple SD Gothic Neo",
+    "Malgun Gothic",
+    "맑은 고딕",
+    "sans-serif",
+  ],
 });
 
-const pretendard = localFont({
-  src: "../../public/assets/fonts/PretendardVariable.woff2",
+const doHyeon = localFont({
+  src: "../../public/assets/fonts/DoHyeonSubset.woff2",
   display: "swap",
-  variable: "--font-pretendard",
+  preload: false,
+  variable: "--font-dohyeon",
+  fallback: [
+    "Apple SD Gothic Neo",
+    "Malgun Gothic",
+    "맑은 고딕",
+    "sans-serif",
+  ],
 });
 
 export const metadata: Metadata = {
@@ -35,7 +47,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className={`scroll-smooth ${doHyeon.variable} ${pretendard.variable}`}>
+    <html
+      lang="ko"
+      className={`scroll-smooth ${pretendard.variable} ${doHyeon.variable}`}
+    >
       <body className="bg-background text-text font-pretendard min-h-screen">
         {children}
       </body>

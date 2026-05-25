@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sehoon Cho Portfolio
+
+Next.js 기반 개인 포트폴리오입니다. 프론트엔드 성능 최적화, 대용량 데이터 처리,
+React/Next.js 프로젝트 경험을 소개합니다.
+
+## Tech Stack
+
+- Next.js 16
+- React 19
+- TypeScript
+- Tailwind CSS v4
+- Framer Motion
+- Lucide React
 
 ## Getting Started
 
-First, run the development server:
+```bash
+npm install
+npm run dev
+```
+
+브라우저에서 [http://localhost:3000](http://localhost:3000)을 엽니다.
+
+## Scripts
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run build
+npm run start
+npm run lint
+npm run fonts:subset
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- `dev`: 개발 서버 실행
+- `build`: 프로덕션 빌드
+- `start`: 프로덕션 서버 실행
+- `lint`: ESLint 검사
+- `fonts:subset`: 현재 소스에 쓰인 글자 기준으로 웹폰트 subset 재생성
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Font Optimization
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+한글 웹폰트가 Lighthouse LCP 경로를 길게 만들지 않도록, 실제 사이트에 쓰이는
+문자만 포함한 subset 폰트를 사용합니다.
 
-## Learn More
+- 본문: `public/assets/fonts/PretendardVariableSubset.woff2`
+- 제목/로고: `public/assets/fonts/DoHyeonSubset.woff2`
+- 원본 폰트: `scripts/font-sources`
+- 적용 위치: `src/app/layout.tsx`, `src/app/globals.css`
 
-To learn more about Next.js, take a look at the following resources:
+문구를 추가하거나 수정한 뒤 글자가 fallback 폰트로 섞여 보이면 아래 명령으로
+subset을 다시 생성합니다.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run fonts:subset
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+자세한 내용은 [Font Optimization](docs/font-optimization.md)을 참고합니다.
 
-## Deploy on Vercel
+## Performance Notes
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Lighthouse 측정은 개발 서버가 아니라 프로덕션 모드에서 확인합니다.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run build
+npm run start
+```
+
+측정 중에는 브라우저 창을 전면에 두고, 확장 프로그램 영향을 줄이려면 시크릿
+창에서 실행하는 것이 좋습니다.
+
+## Project Structure
+
+```txt
+src/app
+src/components/layout
+src/components/sections
+src/components/ui
+public/assets/fonts
+public/assets/images
+scripts/font-sources
+docs
+```
+
+## Docs
+
+- [Font Optimization](docs/font-optimization.md)

@@ -1,8 +1,7 @@
-"use client";
-
 import Float from "@/components/ui/Float";
 import FadeIn from "@/components/ui/FadeIn";
 import Button from "@/components/ui/Button";
+import Image from "next/image";
 import { ArrowRight, Download, Sparkles, ExternalLink } from "lucide-react";
 
 export default function Hero() {
@@ -78,7 +77,12 @@ export default function Hero() {
                 variant="primary"
                 size="md"
                 className="w-full sm:w-auto group"
-                icon={<ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />}
+                icon={
+                  <ArrowRight
+                    size={18}
+                    className="group-hover:translate-x-1 transition-transform"
+                  />
+                }
                 iconPosition="right"
                 aria-label="포트폴리오 프로젝트 섹션으로 이동"
               >
@@ -126,33 +130,36 @@ export default function Hero() {
           </FadeIn>
         </div>
 
-
         {/* Visual Graphic Element (Floating Card Mockup) */}
-        <div className="lg:col-span-5 flex justify-center items-center relative h-[350px] md:h-[450px]">
+        <div className="lg:col-span-5 flex justify-center items-start md:items-center relative min-h-[520px] md:h-[450px] md:min-h-0">
           <Float
             duration={6}
             yOffset={20}
-            className="w-full max-w-[320px] md:max-w-[360px] relative z-10"
+            className="w-full max-w-[320px] md:max-w-[360px] relative z-10 mt-5"
           >
             {/* Main Interactive Card */}
             <div className="bg-surface p-6 sm:p-8 rounded-3xl shadow-xl border border-outer/60 relative overflow-hidden backdrop-blur-sm bg-white/95">
               <div className="absolute top-0 right-0 w-24 h-24 bg-accent-light/30 rounded-bl-full -z-10" />
-              <div className="flex justify-between items-center mb-6">
-                <div className="flex gap-2">
-                  <span className="w-3 h-3 rounded-full bg-primary/40" />
-                  <span className="w-3 h-3 rounded-full bg-secondary/40" />
-                  <span className="w-3 h-3 rounded-full bg-accent-deep/40" />
-                </div>
-                <img
-                  src="/assets/images/profile.jpg"
+              <div className="hidden lg:flex absolute top-4 left-4 z-20 bg-secondary text-secondary-foreground px-3 py-2 rounded-2xl shadow-lg border border-secondary-foreground/20 text-xs font-semibold items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-secondary-foreground animate-ping" />
+                <span>대용량 최적화 전문</span>
+              </div>
+              {/* Profile Image - Large and prominent! */}
+              <div className="relative w-full h-[220px] rounded-2xl overflow-hidden mb-6 border border-outer/40 shadow-sm bg-outer/30">
+                <Image
+                  src="/assets/images/profile.webp"
                   alt="조세훈 프로필 사진"
-                  className="w-12 h-12 rounded-full object-cover border-2 border-outer shadow-sm"
+                  fill
+                  priority
+                  sizes="(min-width: 768px) 296px, calc(100vw - 96px)"
+                  className="object-cover"
                 />
               </div>
-              <div className="font-dohyeon text-xl text-text mb-2">
+
+              <div className="font-dohyeon text-2xl text-text mb-1">
                 Sehoon Cho
               </div>
-              <p className="font-pretendard text-text-secondary text-sm mb-4">
+              <p className="font-pretendard text-text-secondary text-xs sm:text-sm mb-4">
                 Frontend Engineer & Performance Optimizer
               </p>
               <div className="space-y-3 font-pretendard text-xs text-text-secondary">
@@ -170,41 +177,16 @@ export default function Hero() {
                 </div>
                 <div className="flex justify-between pb-1">
                   <span>Motto</span>
-                  <span className="italic text-text font-medium">
-                    "무거운 성능 병목을 해결하고 사용자 경험을 가볍게 띄웁니다."
+                  <span className="italic text-text font-medium leading-relaxed">
+                    &quot;무거운 성능 병목을 해결하고 사용자 경험을 가볍게
+                    띄웁니다.&quot;
                   </span>
                 </div>
               </div>
-              <div className="mt-8 flex justify-center">
+              <div className="mt-6 flex justify-center">
                 <span className="text-[10px] uppercase tracking-wider text-text-secondary bg-outer px-3 py-1 rounded-full font-semibold animate-pulse">
                   Active & Floating
                 </span>
-              </div>
-            </div>
-          </Float>
-
-          {/* Sub floating cards for premium layered look */}
-          <Float
-            duration={8}
-            yOffset={-15}
-            className="absolute top-10 left-4 z-20"
-          >
-            <div className="bg-secondary text-secondary-foreground p-3 rounded-2xl shadow-lg border border-secondary-foreground/20 text-xs font-semibold flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-secondary-foreground animate-ping" />
-              <span>대용량 최적화 전문</span>
-            </div>
-          </Float>
-
-          <Float
-            duration={5}
-            yOffset={25}
-            className="absolute bottom-10 right-4 z-0"
-          >
-            <div className="bg-surface text-text p-4 rounded-2xl shadow-lg border border-outer/60 text-xs font-medium space-y-1">
-              <p className="text-primary font-bold">DOM Nodes</p>
-              <div className="flex gap-1.5 items-center">
-                <div className="w-8 h-1.5 bg-secondary rounded-full animate-pulse" />
-                <span className="font-semibold text-text">97% 절감</span>
               </div>
             </div>
           </Float>
