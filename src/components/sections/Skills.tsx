@@ -1,4 +1,4 @@
-import FadeIn from "./FadeIn";
+import FadeIn from "@/components/ui/FadeIn";
 import SkillCard, { SkillCategory } from "./SkillCard";
 import { Code2, Globe2, Sparkles } from "lucide-react";
 

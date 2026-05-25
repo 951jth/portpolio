@@ -1,4 +1,4 @@
-import FadeIn from "./FadeIn";
+import FadeIn from "@/components/ui/FadeIn";
 import ExperienceCard, { ExperienceItem } from "./ExperienceCard";
 
 export default function Experience() {

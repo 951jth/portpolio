@@ -1,4 +1,4 @@
-import FadeIn from "./FadeIn";
+import FadeIn from "@/components/ui/FadeIn";
 import ContactForm from "./ContactForm";
 import { Mail, Phone, MapPin, Github, MessageSquare } from "lucide-react";
 

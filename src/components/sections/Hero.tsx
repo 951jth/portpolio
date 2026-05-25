@@ -1,8 +1,8 @@
 "use client";
 
-import Float from "./Float";
-import FadeIn from "./FadeIn";
-import Button from "./Button";
+import Float from "@/components/ui/Float";
+import FadeIn from "@/components/ui/FadeIn";
+import Button from "@/components/ui/Button";
 import { ArrowRight, Download, Sparkles, ExternalLink } from "lucide-react";
 
 export default function Hero() {

@@ -2,7 +2,7 @@
 
 import { useState, FormEvent } from "react";
 import { Send } from "lucide-react";
-import Button from "./Button";
+import Button from "@/components/ui/Button";
 
 export default function ContactForm() {
   const [email, setEmail] = useState("");
