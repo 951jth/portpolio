@@ -34,7 +34,7 @@ Stage 3 (runner)  : node:22-alpine — standalone 실행 (server.js)
 - [ ] EC2 인스턴스 생성
   - 리전: `ap-northeast-2` (서울)
   - AMI: Amazon Linux 2023 또는 Ubuntu 24.04
-  - 타입: `t2.micro` (프리 티어)
+  - 타입: `t3.micro` (프리 티어)
   - 스토리지: 20GB
   - 키 페어 생성 → `.pem` 파일 보관
 - [ ] 보안 그룹 인바운드 규칙 설정

@@ -102,6 +102,25 @@ http://<EC2_PUBLIC_IP>
 HTTP / TCP / 80 / 0.0.0.0/0
 ```
 
+EC2에 Docker 컨테이너만 올린 상태에서는 기본 접속 방식이 HTTP다.  
+아래 명령은 EC2의 80번 포트를 컨테이너의 3000번 포트로 연결한다.
+
+```bash
+docker run -d --name portfolio -p 80:3000 --restart unless-stopped portfolio
+```
+
+따라서 접속 주소는 아래 형식이다.
+
+```text
+http://<EC2_PUBLIC_IP>
+```
+
+아직 HTTPS 설정을 하지 않았다면 아래 주소는 동작하지 않는다.
+
+```text
+https://<EC2_PUBLIC_IP>
+```
+
 ## 7. 업데이트 배포
 
 새 커밋을 GitHub에 push한 뒤 EC2에서 실행한다.
@@ -157,6 +176,178 @@ docker run -d --name portfolio -p 80:3000 --restart unless-stopped ghcr.io/951jt
 - GHCR 이미지가 private이면 EC2에서 `docker login ghcr.io`가 필요하다.
 - 가장 단순하게 운영하려면 GHCR package를 public으로 설정하거나 Docker Hub public repository를 사용할 수 있다.
 - 이 방식은 EC2가 빌드 머신 역할을 하지 않아도 되므로 무료 티어 인스턴스에 더 적합하다.
+
+## 9. HTTPS 적용 가이드
+
+HTTPS는 보통 IP 주소가 아니라 도메인에 적용한다.  
+Let's Encrypt 인증서는 일반적으로 도메인 기준으로 발급하므로 먼저 도메인을 준비해야 한다.
+
+전체 흐름:
+
+```text
+도메인 구매 또는 보유 도메인 사용
+-> Elastic IP를 EC2에 연결
+-> DNS A 레코드를 Elastic IP로 연결
+-> EC2에 Nginx 설치
+-> Nginx가 localhost:3000으로 reverse proxy
+-> Certbot으로 Let's Encrypt 인증서 발급
+-> https://<DOMAIN> 접속 확인
+```
+
+### 9-1. Elastic IP 연결
+
+EC2 기본 퍼블릭 IP는 인스턴스를 중지 후 다시 시작하면 바뀔 수 있다.  
+도메인을 연결할 예정이면 Elastic IP를 할당해서 EC2에 연결한다.
+
+```text
+EC2
+-> Elastic IPs
+-> Allocate Elastic IP address
+-> Actions
+-> Associate Elastic IP address
+-> portfolio-prod 인스턴스 선택
+```
+
+### 9-2. DNS A 레코드 설정
+
+도메인 관리 화면에서 A 레코드를 추가한다.
+
+```text
+Type: A
+Name: @ 또는 원하는 서브도메인
+Value: <ELASTIC_IP>
+TTL: Auto 또는 기본값
+```
+
+예시:
+
+```text
+example.com      A      <ELASTIC_IP>
+www.example.com  A      <ELASTIC_IP>
+```
+
+DNS 반영은 몇 분에서 수십 분 정도 걸릴 수 있다.
+
+### 9-3. Docker 컨테이너 포트 변경
+
+Nginx가 80/443 포트를 사용해야 하므로, 컨테이너는 EC2 내부 포트 3000에서만 열어두는 방식이 깔끔하다.
+
+기존 80번 포트 컨테이너 중지:
+
+```bash
+docker stop portfolio
+docker rm portfolio
+```
+
+컨테이너를 localhost 3000번으로 실행:
+
+```bash
+docker run -d --name portfolio -p 127.0.0.1:3000:3000 --restart unless-stopped portfolio
+```
+
+이후 외부 사용자는 Nginx를 통해 접속하고, 컨테이너는 EC2 내부에서만 접근된다.
+
+### 9-4. Nginx 설치
+
+Amazon Linux 2023 기준:
+
+```bash
+sudo dnf install nginx -y
+sudo systemctl start nginx
+sudo systemctl enable nginx
+```
+
+### 9-5. Nginx reverse proxy 설정
+
+설정 파일을 만든다.
+
+```bash
+sudo vi /etc/nginx/conf.d/portfolio.conf
+```
+
+내용:
+
+```nginx
+server {
+    listen 80;
+    server_name <DOMAIN> www.<DOMAIN>;
+
+    location / {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+```
+
+설정 검사 후 재시작:
+
+```bash
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
+이 시점에서 아래 주소가 열려야 한다.
+
+```text
+http://<DOMAIN>
+```
+
+### 9-6. 보안 그룹 확인
+
+HTTPS까지 적용하려면 보안 그룹 인바운드 규칙이 아래처럼 되어 있어야 한다.
+
+```text
+SSH    TCP    22     내 공인 IP/32
+HTTP   TCP    80     0.0.0.0/0
+HTTPS  TCP    443    0.0.0.0/0
+```
+
+### 9-7. Certbot으로 SSL 인증서 발급
+
+Amazon Linux 2023에서 Certbot 설치:
+
+```bash
+sudo dnf install certbot python3-certbot-nginx -y
+```
+
+인증서 발급:
+
+```bash
+sudo certbot --nginx -d <DOMAIN> -d www.<DOMAIN>
+```
+
+중간에 HTTP를 HTTPS로 리다이렉트할지 물어보면 redirect를 선택한다.
+
+인증서 자동 갱신 확인:
+
+```bash
+sudo certbot renew --dry-run
+```
+
+### 9-8. HTTPS 접속 확인
+
+브라우저에서 확인한다.
+
+```text
+https://<DOMAIN>
+```
+
+문제가 생기면 아래 순서로 확인한다.
+
+```bash
+docker ps
+docker logs portfolio
+sudo nginx -t
+sudo systemctl status nginx
+sudo certbot certificates
+```
 
 ## 참고
 
