@@ -31,7 +31,7 @@ git push origin master
 Amazon Linux 2023의 기본 사용자는 `ec2-user`다.
 
 ```powershell
-ssh -i C:\Users\<USER>\Downloads\<KEY_FILE>.pem ec2-user@<EC2_PUBLIC_IP>
+ssh -i C:\Users\<USER>\.ssh\<KEY_FILE>.pem ec2-user@<EC2_PUBLIC_IP>
 ```
 
 ## 3. 프로젝트 clone
