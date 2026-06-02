@@ -7,6 +7,9 @@ on:
       - master # master 브랜치에 코드가 푸시(push)될 때 실행됩니다.
       - main   # main 브랜치에 코드가 푸시될 때도 실행됩니다. (둘 중 존재하는 브랜치 기준)
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true # Node.js 20 지원 종료 경고 해결용 환경변수
+
 jobs:
   # 첫 번째 작업: Docker 이미지를 빌드하고 GHCR에 업로드(Push)합니다.
   build-and-push:
@@ -41,8 +44,8 @@ jobs:
           context: . # 현재 폴더에 있는 Dockerfile을 사용함
           push: true # 빌드 완료 후 GHCR에 자동으로 푸시함
           tags: |
-            ghcr.io/951jth/portpolio:latest # 항상 최신 버전을 가리키는 태그
-            ghcr.io/951jth/portpolio:${{ github.sha }} # 커밋 해시(고유번호)를 태그로 달아 버전 관리를 용이하게 함
+            ghcr.io/951jth/portpolio:latest
+            ghcr.io/951jth/portpolio:${{ github.sha }}
           cache-from: type=gha # 이전에 빌드했던 캐시를 가져와 빌드 속도를 매우 빠르게 단축시킴
           cache-to: type=gha,mode=max # 이번 빌드 결과를 캐시로 저장함
 
