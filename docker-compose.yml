@@ -15,10 +15,8 @@ services:
       - caddy_config:/config
 
   portfolio:
-    image: portfolio
+    image: ghcr.io/951jth/portpolio:latest
     container_name: portfolio
-    build:
-      context: .
     restart: unless-stopped
     expose:
       - "3000"

@@ -1,140 +1,109 @@
-# 배포 플랜 — AWS EC2 + Docker
+# 배포 플랜: GitHub Actions + GHCR + AWS EC2
+
+## 목표
+
+현재 EC2에 배포된 포트폴리오 사이트를 유지하면서, 배포 과정을 GitHub Actions로 자동화합니다. 저장소와 컨테이너 이미지는 공개 가능한 포트폴리오 자산으로 다루고, AWS ECR 대신 GitHub Container Registry를 사용합니다.
 
 ## 아키텍처
 
-```
-[사용자] → [EC2 (서울 리전)] → [Nginx :80/:443] → [Docker Container (Next.js standalone :3000)]
-```
-
----
-
-## Phase 1: Next.js standalone 빌드 설정
-
-- [ ] `next.config.ts`에 `output: "standalone"` 추가
-- [ ] `npm run build`로 로컬 빌드 확인 (`.next/standalone/` 생성 여부)
-
-## Phase 2: Docker 설정
-
-- [ ] 프로젝트 루트에 `Dockerfile` 작성 (멀티스테이지 빌드)
-- [ ] `.dockerignore` 작성
-- [ ] 로컬에서 `docker build -t portfolio .` 빌드 성공 확인
-- [ ] `docker run -p 3000:3000 portfolio`로 http://localhost:3000 동작 확인
-
-### Dockerfile 구조
-
-```
-Stage 1 (deps)    : node:22-alpine — npm ci
-Stage 2 (builder) : node:22-alpine — npm run build
-Stage 3 (runner)  : node:22-alpine — standalone 실행 (server.js)
+```txt
+GitHub public repo
+  -> GitHub Actions
+  -> GHCR public Docker image
+  -> EC2 Docker Compose
+  -> Caddy :80/:443
+  -> Next.js standalone container :3000
 ```
 
-## Phase 3: AWS 인프라 준비
+## Phase 1: 현재 EC2 배포 상태 정리
 
-- [ ] AWS 계정 생성 (프리 티어)
-- [ ] EC2 인스턴스 생성
-  - 리전: `ap-northeast-2` (서울)
-  - AMI: Amazon Linux 2023 또는 Ubuntu 24.04
-  - 타입: `t3.micro` (프리 티어)
-  - 스토리지: 20GB
-  - 키 페어 생성 → `.pem` 파일 보관
-- [ ] 보안 그룹 인바운드 규칙 설정
-  - SSH (22): 내 IP만
-  - HTTP (80): 0.0.0.0/0
-  - HTTPS (443): 0.0.0.0/0
-- [ ] 탄력적 IP(Elastic IP) 할당 & 연결
+- [ ] EC2 접속 정보 확인
+- [ ] 배포 디렉터리 확인
+- [ ] `docker compose ps`로 `portfolio`, `portfolio-proxy` 상태 확인
+- [ ] Caddyfile과 도메인/HTTPS 설정 유지 여부 확인
+- [ ] 기존 수동 배포 명령 기록
 
-## Phase 4: EC2 서버 세팅
+## Phase 2: GitHub public 저장소 준비
 
-- [ ] SSH 접속: `ssh -i key.pem ec2-user@<IP>`
-- [ ] 시스템 업데이트
-- [ ] Docker 설치 & 서비스 시작
-- [ ] 현재 사용자를 docker 그룹에 추가
+- [ ] 저장소를 public으로 전환
+- [ ] 민감 정보가 커밋되어 있지 않은지 확인
+- [ ] `.env`, SSH key, 인증서, 개인 토큰이 repository에 없는지 확인
+- [ ] README에 배포 자동화 구조를 간단히 정리
 
-### Amazon Linux 2023
+## Phase 3: Docker image 배포 방식을 GHCR로 전환
+
+- [ ] image 이름 결정: `ghcr.io/<github-owner>/<repo-name>:latest`
+- [ ] GitHub Actions에서 build할 수 있도록 Dockerfile 유지
+- [ ] EC2의 `docker-compose.yml`에서 `build` 대신 `image`를 사용하도록 변경
+- [ ] GHCR package visibility를 public으로 설정
+
+## Phase 4: GitHub Actions workflow 추가
+
+파일 경로: `.github/workflows/deploy.yml`
+
+- [ ] `main` 브랜치 push 시 실행
+- [ ] checkout
+- [ ] `npm ci`
+- [ ] `npm run lint`
+- [ ] `npm run build`
+- [ ] Docker image build
+- [ ] GHCR push
+- [ ] SSH로 EC2 접속
+- [ ] `docker compose pull`
+- [ ] `docker compose up -d`
+- [ ] 이전 image 정리
+
+## Phase 5: GitHub Secrets 등록
+
+- [ ] `EC2_HOST`
+- [ ] `EC2_USERNAME`
+- [ ] `EC2_SSH_KEY`
+- [ ] `EC2_PORT` 필요 시
+
+public GHCR image를 pull하는 구조라면 EC2 배포 단계에서 별도의 registry token은 필요하지 않습니다.
+
+## Phase 6: 검증
+
+- [ ] Actions build job 성공 확인
+- [ ] Actions deploy job 성공 확인
+- [ ] GHCR package가 public인지 확인
+- [ ] EC2에서 `docker ps` 확인
+- [ ] 사이트 접속 후 최신 변경사항 반영 확인
+- [ ] `docker logs portfolio` 오류 확인
+- [ ] HTTPS 인증서와 Caddy reverse proxy 정상 동작 확인
+
+## 수동 배포에서 자동 배포로 바뀌는 점
+
+### 기존 수동 배포
 
 ```bash
-sudo dnf update -y
-sudo dnf install docker git -y
-sudo systemctl start docker && sudo systemctl enable docker
-sudo usermod -aG docker $USER
-```
-
-### Ubuntu 24.04
-
-```bash
-sudo apt update && sudo apt install docker.io git -y
-sudo systemctl start docker && sudo systemctl enable docker
-sudo usermod -aG docker $USER
-```
-
-## Phase 5: 배포
-
-### 방법 A — EC2에서 직접 빌드
-
-- [ ] `git clone <repo-url> portfolio`
-- [ ] `cd portfolio && docker build -t portfolio .`
-- [ ] `docker run -d --name portfolio -p 80:3000 --restart unless-stopped portfolio`
-- [ ] `http://<EC2-Public-IP>` 접속 확인
-
-### 방법 B — Docker Hub 경유
-
-- [ ] Docker Hub 계정 생성
-- [ ] 로컬: `docker build -t <user>/portfolio:latest .`
-- [ ] 로컬: `docker push <user>/portfolio:latest`
-- [ ] EC2: `docker pull <user>/portfolio:latest`
-- [ ] EC2: `docker run -d --name portfolio -p 80:3000 --restart unless-stopped <user>/portfolio:latest`
-
-## Phase 6: (선택) 도메인 + HTTPS
-
-- [ ] 도메인 구매 (Route 53 또는 외부 등록 업체)
-- [ ] DNS A 레코드 → EC2 탄력적 IP
-- [ ] Nginx 설치 & 리버스 프록시 설정
-
-```nginx
-server {
-    listen 80;
-    server_name your-domain.com;
-
-    location / {
-        proxy_pass http://localhost:3000;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_cache_bypass $http_upgrade;
-    }
-}
-```
-
-- [ ] Let's Encrypt SSL 인증서 발급
-
-```bash
-sudo certbot --nginx -d your-domain.com
-```
-
----
-
-## 비용 참고
-
-| 항목 | 비용 |
-|------|------|
-| EC2 t2.micro | 프리 티어 12개월 무료, 이후 ~$8/월 |
-| 탄력적 IP | EC2 연결 시 무료, 미연결 시 과금 |
-| 도메인 (.com) | ~$12/년 |
-| Docker Hub | 무료 (public repo) |
-
-> ⚠️ **사용하지 않을 때 인스턴스를 중지**해야 불필요 과금 방지
-
----
-
-## 업데이트 배포 (재배포)
-
-```bash
-# EC2에서
 cd portfolio
 git pull origin main
-docker build -t portfolio .
-docker stop portfolio && docker rm portfolio
-docker run -d --name portfolio -p 80:3000 --restart unless-stopped portfolio
+docker compose build
+docker compose up -d
 ```
+
+### 변경 후 자동 배포
+
+```txt
+git push origin main
+  -> GitHub Actions가 build/test/image push/deploy 실행
+```
+
+EC2는 더 이상 소스 코드를 빌드하지 않고, 검증된 GHCR image만 pull해서 실행합니다.
+
+## 포트폴리오 어필 포인트
+
+- GitHub Actions workflow로 CI/CD 구현
+- Docker multi-stage build와 Next.js standalone 배포
+- GHCR public registry 사용
+- EC2 + Docker Compose 운영
+- Caddy를 이용한 HTTPS reverse proxy
+- 수동 배포를 push 기반 자동 배포로 개선
+
+## 다음 작업 후보
+
+- [ ] `.github/workflows/deploy.yml` 작성
+- [ ] `docker-compose.yml`의 `portfolio.image`를 GHCR 주소로 변경
+- [ ] README에 배포 자동화 섹션 추가
+- [ ] 첫 Actions 실행 후 실패 로그 기준으로 보정

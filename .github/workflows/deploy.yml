@@ -1,0 +1,76 @@
+name: Deploy to EC2 # GitHub Actions 페이지에 표시될 워크플로우의 이름입니다.
+
+# 어떤 이벤트가 발생했을 때 이 배포 스크립트를 실행할지 정의합니다.
+on:
+  push:
+    branches:
+      - master # master 브랜치에 코드가 푸시(push)될 때 실행됩니다.
+      - main   # main 브랜치에 코드가 푸시될 때도 실행됩니다. (둘 중 존재하는 브랜치 기준)
+
+jobs:
+  # 첫 번째 작업: Docker 이미지를 빌드하고 GHCR에 업로드(Push)합니다.
+  build-and-push:
+    runs-on: ubuntu-latest # 이 작업이 실행될 가상 머신(서버)의 운영체제입니다.
+    
+    # 이 작업이 GitHub 저장소와 패키지(GHCR)에 접근할 수 있는 권한을 설정합니다.
+    permissions:
+      contents: read   # 소스 코드를 읽을 수 있는 권한
+      packages: write  # GHCR에 이미지를 쓸 수(업로드할 수) 있는 권한 (필수!)
+
+    steps:
+      # 1. 가상 머신에 현재 레포지토리의 코드를 다운로드(체크아웃) 받습니다.
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Docker 빌드를 더 빠르고 다양하게 지원해 주는 Buildx 도구를 세팅합니다.
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # 3. GHCR(GitHub 패키지 저장소)에 로그인합니다.
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }} # 현재 작업을 실행시킨 GitHub 유저명
+          password: ${{ secrets.GITHUB_TOKEN }} # GitHub이 자동으로 발급해주는 임시 비밀번호
+
+      # 4. 코드를 바탕으로 Docker 이미지를 만들고(Build) GHCR에 올립니다(Push).
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: . # 현재 폴더에 있는 Dockerfile을 사용함
+          push: true # 빌드 완료 후 GHCR에 자동으로 푸시함
+          tags: |
+            ghcr.io/951jth/portpolio:latest # 항상 최신 버전을 가리키는 태그
+            ghcr.io/951jth/portpolio:${{ github.sha }} # 커밋 해시(고유번호)를 태그로 달아 버전 관리를 용이하게 함
+          cache-from: type=gha # 이전에 빌드했던 캐시를 가져와 빌드 속도를 매우 빠르게 단축시킴
+          cache-to: type=gha,mode=max # 이번 빌드 결과를 캐시로 저장함
+
+  # 두 번째 작업: 업로드된 이미지를 EC2 서버에서 다운로드 받아 실행합니다.
+  deploy:
+    needs: build-and-push # 반드시 위에 있는 'build-and-push' 작업이 성공적으로 끝난 후에만 실행됩니다.
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. 사전에 등록한 Secrets 정보를 이용해 EC2 서버에 SSH로 원격 접속합니다.
+      - name: Deploy to EC2 via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            # 접속 직후 EC2 내부의 프로젝트 폴더로 이동합니다.
+            cd portfolio
+            
+            # 1. GitHub에서 최신 설정 파일(docker-compose.yml 등) 변경사항을 가져옵니다.
+            git pull origin master || git pull origin main
+            
+            # 2. GHCR에서 방금 빌드된 따끈따끈한 최신 이미지를 다운로드(Pull) 합니다.
+            docker pull ghcr.io/951jth/portpolio:latest
+            
+            # 3. 다운로드한 새 이미지를 바탕으로 컨테이너를 다시 켭니다. (-d: 백그라운드 실행)
+            docker-compose up -d
+            
+            # 4. 새로 배포되면서 더 이상 사용하지 않게 된 옛날 찌꺼기 이미지들을 삭제하여 디스크 용량을 확보합니다.
+            docker image prune -f
