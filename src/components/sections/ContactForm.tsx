@@ -1,23 +1,43 @@
 "use client";
 
 import { useState, FormEvent } from "react";
-import { Send } from "lucide-react";
+import { Send, Loader2 } from "lucide-react";
 import Button from "@/components/ui/Button";
 
 export default function ContactForm() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (email && message) {
-      setSubmitted(true);
-      setTimeout(() => {
-        setEmail("");
-        setMessage("");
-        setSubmitted(false);
-      }, 3000);
+    if (!email || !message) return;
+
+    setIsLoading(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, message }),
+      });
+      
+      const result = await res.json();
+      
+      if (result.success) {
+        setSubmitted(true);
+        setTimeout(() => {
+          setEmail("");
+          setMessage("");
+          setSubmitted(false);
+        }, 4000);
+      } else {
+        alert(result.error || "메시지 전송에 실패했습니다.");
+      }
+    } catch (error) {
+      alert("오류가 발생했습니다. 다시 시도해 주세요.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -66,9 +86,10 @@ export default function ContactForm() {
             variant="primary"
             size="md"
             className="w-full"
-            icon={<Send size={16} />}
+            disabled={isLoading}
+            icon={isLoading ? <Loader2 className="animate-spin" size={16} /> : <Send size={16} />}
           >
-            메시지 전송
+            {isLoading ? "전송 중..." : "메시지 전송"}
           </Button>
         </form>
       )}

@@ -1,13 +1,13 @@
-import { ArrowUpRight, Github, Heart } from "lucide-react";
 import Button from "@/components/ui/Button";
+import { ArrowUpRight, Github, Heart } from "lucide-react";
 
 export interface ProjectItem {
   title: string;
   category: string;
   description: string;
   tags: string[];
-  link: string;
-  github: string;
+  link?: string;
+  github?: string;
   featured: boolean;
 }
 
@@ -62,7 +62,7 @@ export default function ProjectCard({ project }: { project: ProjectItem }) {
 
           {/* Actions */}
           <div className="flex gap-3 items-center border-t border-outer/30 pt-6">
-            <Button
+            {project.link && <Button
               href={project.link}
               target="_blank"
               variant="outline"
@@ -72,8 +72,8 @@ export default function ProjectCard({ project }: { project: ProjectItem }) {
               aria-label={`${project.title} 상세 이력서 및 엔지니어링 로그 방문 (새 창 이동)`}
             >
               상세 로그 보기
-            </Button>
-            <Button
+            </Button>}
+            {project.github && <Button
               href={project.github}
               target="_blank"
               variant="ghost"
@@ -82,7 +82,7 @@ export default function ProjectCard({ project }: { project: ProjectItem }) {
               aria-label={`${project.title} 깃허브 저장소 방문 (새 창 이동)`}
             >
               GitHub
-            </Button>
+            </Button>}
           </div>
         </div>
       </div>
