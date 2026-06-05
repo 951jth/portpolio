@@ -13,7 +13,8 @@ export async function POST(request: Request) {
     }
 
     const webhookUrl = process.env.PANDYTALK_WEBHOOK_URL;
-
+    console.log("Received contact message:", { email, message });
+    console.log('webhookUrl:', webhookUrl);
     if (!webhookUrl) {
       console.warn("⚠️ PANDYTALK_WEBHOOK_URL is not defined in environment variables.");
       // 임시로 성공 처리 (Webhook이 연결될 때까지)

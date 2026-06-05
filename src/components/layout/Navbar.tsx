@@ -1,12 +1,11 @@
-import NavbarContainer from "./NavbarContainer";
 import MobileMenu from "./MobileMenu";
+import NavbarContainer from "./NavbarContainer";
 
 const navLinks = [
   { name: "소개", href: "#hero" },
   { name: "기술 스택", href: "#skills" },
   { name: "경력 사항", href: "#experience" },
   { name: "프로젝트", href: "#projects" },
-  { name: "연락처", href: "#contact" },
 ];
 
 export default function Navbar() {

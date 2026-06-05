@@ -1,5 +1,6 @@
 import { ReactNode, ComponentPropsWithoutRef } from "react";
 import Link from "next/link";
+import { Loader2 } from "lucide-react";
 
 export interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
   href?: string;
@@ -11,6 +12,8 @@ export interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
   target?: string;
   rel?: string;
   className?: string;
+  loading?: boolean;
+  loadingText?: string;
 }
 
 export default function Button({
@@ -23,6 +26,8 @@ export default function Button({
   target,
   rel,
   className = "",
+  loading = false,
+  loadingText,
   children,
   ...props
 }: ButtonProps) {
@@ -49,15 +54,31 @@ export default function Button({
     lg: "px-10 py-4 rounded-full text-base font-semibold gap-2.5",
   };
 
-  const classes = `${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`;
+  const disabledClasses = loading || props.disabled ? "opacity-70 cursor-not-allowed hover:-translate-y-0 active:scale-100 pointer-events-none" : "";
+  const classes = `${baseStyles} ${variants[variant]} ${sizes[size]} ${disabledClasses} ${className}`;
 
   const renderContent = () => (
     <>
-      {icon && iconPosition === "left" && (
+      {loading ? (
+        <span className="flex items-center justify-center transition-transform">
+          <Loader2 className="animate-spin" size={size === "sm" ? 14 : size === "md" ? 16 : 18} />
+        </span>
+      ) : icon && iconPosition === "left" ? (
         <span className="flex items-center justify-center transition-transform">{icon}</span>
+      ) : null}
+
+      {loading ? (
+        <span className="flex items-center dot-loading">
+          {loadingText || children}
+          <span className="ml-0.5">.</span>
+          <span>.</span>
+          <span>.</span>
+        </span>
+      ) : (
+        <span>{children}</span>
       )}
-      <span>{children}</span>
-      {icon && iconPosition === "right" && (
+
+      {!loading && icon && iconPosition === "right" && (
         <span className="flex items-center justify-center transition-transform">{icon}</span>
       )}
     </>
@@ -89,7 +110,7 @@ export default function Button({
   }
 
   return (
-    <button className={classes} {...props}>
+    <button className={classes} disabled={loading || props.disabled} aria-disabled={loading || props.disabled} {...props}>
       {renderContent()}
     </button>
   );

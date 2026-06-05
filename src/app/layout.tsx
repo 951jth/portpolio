@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 const pretendard = localFont({
@@ -30,14 +31,25 @@ const doHyeon = localFont({
 
 export const metadata: Metadata = {
   title: "조세훈 | 프론트엔드 엔지니어 포트폴리오",
-  description: "무거운 성능 병목을 해결하고 사용자 경험을 가볍게 띄우는 6년 차 프론트엔드 엔지니어 조세훈의 포트폴리오입니다. React, Next.js, React Native, Web Worker, 대용량 최적화 설계 역량을 소개합니다.",
+  description: "성능 최적화와 사용자 경험 개선에 집중하는 6년 차 프론트엔드 엔지니어 조세훈의 포트폴리오입니다. React, Next.js 등의 기술 스택과 대용량 데이터 처리 경험을 소개합니다.",
   keywords: ["조세훈", "프론트엔드", "엔지니어", "개발자", "포트폴리오", "React", "Next.js", "TypeScript", "React Native", "성능최적화", "대용량데이터"],
   authors: [{ name: "조세훈" }],
   openGraph: {
     title: "조세훈 | 프론트엔드 엔지니어 포트폴리오",
-    description: "무거운 성능 병목을 해결하고 사용자 경험을 가볍게 띄우는 프론트엔드 엔지니어 조세훈의 포트폴리오 웹사이트입니다.",
+    description: "성능 최적화와 사용자 경험 개선에 집중하는 프론트엔드 엔지니어 조세훈의 포트폴리오 웹사이트입니다.",
     type: "website",
     locale: "ko_KR",
+  },
+};
+
+const customToastOptions = {
+  classNames: {
+    toast: "font-pretendard border rounded-2xl shadow-sm w-full p-4 flex items-center gap-3",
+    success: "bg-secondary/10 border-secondary/30 text-secondary",
+    error: "bg-primary/10 border-primary/30 text-primary",
+    title: "text-sm font-bold",
+    description: "text-xs",
+    icon: "w-5 h-5",
   },
 };
 
@@ -53,6 +65,10 @@ export default function RootLayout({
     >
       <body className="bg-background text-text font-pretendard min-h-screen">
         {children}
+        <Toaster 
+          position="top-center" 
+          toastOptions={customToastOptions}
+        />
       </body>
     </html>
   );

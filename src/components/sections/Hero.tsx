@@ -48,25 +48,25 @@ export default function Hero() {
           <FadeIn direction="up" delay={0.1}>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-light/50 text-accent-deep font-semibold text-xs border border-primary/20 w-fit mx-auto lg:mx-0">
               <Sparkles size={14} className="animate-pulse" />
-              <span>성능 병목을 해결하는 6년 차 프론트엔드 엔지니어</span>
+              <span>성능 최적화에 집중하는 6년 차 프론트엔드 엔지니어</span>
             </div>
           </FadeIn>
 
           <FadeIn direction="up" delay={0.2}>
             <h1 className="font-dohyeon text-4xl sm:text-5xl md:text-6xl text-text leading-[1.2] tracking-tight">
-              사용자와 기술 사이,{" "}
+              안정적이고 빠른{" "}
               <span className="text-primary block sm:inline">
-                부드러운 경험
+                사용자 경험
               </span>
-              을 만듭니다.
+              을 구축합니다.
             </h1>
           </FadeIn>
 
           <FadeIn direction="up" delay={0.3}>
             <p className="font-pretendard text-text-secondary text-base sm:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">
-              안녕하세요, 조세훈입니다. 제품과 비즈니스의 무게를 가중시키는
-              대용량 데이터 처리 문제와 프론트엔드 병목을 구조적으로 해결해 온
-              6년 차 엔지니어입니다.
+              안녕하세요, 조세훈입니다. 프론트엔드 성능 병목 현상과 
+              대용량 데이터 처리 문제를 구조적으로 해결하여, 
+              쾌적한 웹 환경을 제공하는 6년 차 엔지니어입니다.
             </p>
           </FadeIn>
 
@@ -95,7 +95,7 @@ export default function Hero() {
                 target="_blank"
                 className="w-full sm:w-auto"
                 icon={<ExternalLink size={18} />}
-                aria-label="조세훈 노션 문제해결 상세 엔지니어링 로그 방문 (새 창 이동)"
+                aria-label="조세훈 문제해결 상세 로그 (새 창 이동)"
               >
                 문제해결 상세
               </Button>
@@ -178,14 +178,13 @@ export default function Hero() {
                 <div className="flex justify-between pb-1">
                   <span>Motto</span>
                   <span className="italic text-text font-medium leading-relaxed">
-                    &quot;무거운 성능 병목을 해결하고 사용자 경험을 가볍게
-                    띄웁니다.&quot;
+                    &quot;성능 최적화를 통해 더 나은 사용자 경험을 만듭니다.&quot;
                   </span>
                 </div>
               </div>
               <div className="mt-6 flex justify-center">
-                <span className="text-[10px] uppercase tracking-wider text-text-secondary bg-outer px-3 py-1 rounded-full font-semibold animate-pulse">
-                  Active & Floating
+                <span className="text-[10px] uppercase tracking-wider text-text-secondary bg-outer px-3 py-1 rounded-full font-semibold">
+                  Open to Opportunities
                 </span>
               </div>
             </div>
