@@ -6,7 +6,7 @@ import "./globals.css";
 const pretendard = localFont({
   src: "../../public/assets/fonts/PretendardVariableSubset.woff2",
   display: "swap",
-  preload: false,
+  preload: true,
   variable: "--font-pretendard",
   fallback: [
     "Apple SD Gothic Neo",
@@ -19,7 +19,7 @@ const pretendard = localFont({
 const doHyeon = localFont({
   src: "../../public/assets/fonts/DoHyeonSubset.woff2",
   display: "swap",
-  preload: false,
+  preload: true,
   variable: "--font-dohyeon",
   fallback: [
     "Apple SD Gothic Neo",

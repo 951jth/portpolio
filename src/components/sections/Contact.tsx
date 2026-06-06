@@ -105,13 +105,13 @@ export default function Contact() {
           href="https://github.com/951jth/portpolio" 
           target="_blank" 
           rel="noreferrer"
-          className="flex items-center gap-1.5 text-text-secondary hover:text-primary transition-colors font-pretendard text-xs group"
+          className="flex items-center gap-1.5 text-text hover:text-primary transition-colors font-pretendard text-xs group"
           aria-label="포트폴리오 소스코드 깃허브 방문 (새 창 이동)"
         >
           <Github size={14} className="group-hover:scale-110 transition-transform" />
           <span>Portfolio Source Code</span>
         </a>
-        <p className="font-pretendard text-[11px] text-text-secondary">
+        <p className="font-pretendard text-[11px] text-text">
           © {new Date().getFullYear()} 조세훈. Designed and Coded with Natural Warm Theme. All rights reserved.
         </p>
       </div>
