@@ -183,7 +183,7 @@ export default function Hero() {
                 </div>
               </div>
               <div className="mt-6 flex justify-center">
-                <span className="text-[10px] uppercase tracking-wider text-text-secondary bg-outer px-3 py-1 rounded-full font-semibold">
+                <span className="text-[10px] uppercase tracking-wider text-text bg-outer/80 border border-outer px-3 py-1 rounded-full font-semibold">
                   Open to Opportunities
                 </span>
               </div>

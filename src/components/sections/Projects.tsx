@@ -17,7 +17,7 @@ const projects: ProjectItem[] = [
     category: "B2B Telecom Back-Office",
     theme: "emerald",
     description:
-      "30만 건 이상의 방대한 통화 내역 다운로드 시 발생하는 서버 OOM(메모리 부족) 및 지연 문제를 해결하기 위한 아키텍처 재설계입니다. 생성 책임을 서버에서 클라이언트로 이전하고 Web Worker 기반 백그라운드 스레드에서 SheetJS를 활용해 연속 페이징 수신 방식으로 무중단 60만 건 다운로드 안정화 및 실패율 제로화를 달성했습니다.",
+      "30만 건 이상의 방대한 통화 내역 다운로드 시 발생하는 서버 OOM(메모리 부족) 및 지연 문제를 해결하기 위한 아키텍처 재설계입니다. 생성 책임을 서버에서 클라이언트로 이전하고 Web Worker 기반 백그라운드 스레드에서 SheetJS를 활용해 연속 페이징 수신 방식으로 무중단 60만 건 다운로드 안정화 달성하였습니다.",
     tags: ["React", "SheetJS", "Web Worker", "ZIP Compression"],
     link: "https://admitted-flamingo-2a3.notion.site/Engineering-Log-30159549cbc0800286f9faf3a378fda2",
     featured: true,

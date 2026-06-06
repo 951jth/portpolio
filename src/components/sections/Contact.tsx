@@ -100,7 +100,17 @@ export default function Contact() {
       </div>
 
       {/* Footer copyright */}
-      <div className="max-w-5xl mx-auto border-t border-outer/40 mt-20 pt-8 text-center">
+      <div className="max-w-5xl mx-auto border-t border-outer/40 mt-20 pt-8 pb-12 flex flex-col items-center gap-3 text-center">
+        <a 
+          href="https://github.com/951jth/portpolio" 
+          target="_blank" 
+          rel="noreferrer"
+          className="flex items-center gap-1.5 text-text-secondary hover:text-primary transition-colors font-pretendard text-xs group"
+          aria-label="포트폴리오 소스코드 깃허브 방문 (새 창 이동)"
+        >
+          <Github size={14} className="group-hover:scale-110 transition-transform" />
+          <span>Portfolio Source Code</span>
+        </a>
         <p className="font-pretendard text-[11px] text-text-secondary">
           © {new Date().getFullYear()} 조세훈. Designed and Coded with Natural Warm Theme. All rights reserved.
         </p>
