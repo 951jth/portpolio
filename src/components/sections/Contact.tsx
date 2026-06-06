@@ -1,5 +1,5 @@
 import FadeIn from "@/components/ui/FadeIn";
-import { Github, Mail, MapPin, Phone } from "lucide-react";
+import { Github, Mail, Phone } from "lucide-react";
 import ContactForm from "./ContactForm";
 
 export default function Contact() {
@@ -15,12 +15,6 @@ export default function Contact() {
       label: "전화번호",
       value: "+82 10-8968-9274",
       href: "tel:+821089689274",
-    },
-    {
-      icon: <MapPin className="text-accent-deep" size={20} />,
-      label: "위치",
-      value: "대한민국 서울특별시",
-      href: "#",
     },
   ];
 
