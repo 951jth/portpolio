@@ -13,7 +13,6 @@ export default function Experience() {
         "Web Worker와 SheetJS를 연동한 엑셀 클라이언트 스트리밍 구조 제안 및 최대 60만 건 대용량 통화 로그 다운로드 비용 절감 및 안정화",
         "Chrome Performance 프로파일링 및 가상 테이블(React Virtuoso) 컴포넌트화 도입으로 초기 렌더링 속도 90% 단축(2.8s ➡️ 0.3s) 및 DOM Node 97% 감소",
         "반복적인 폼 레이아웃 복잡성을 해소하기 위해 JSON 설정 기반의 선언적 폼 디자인 패턴 구축, LOC 평균 23% 개선",
-        "React Native CLI 기반의 AI 비서 앱(PandyTalk) Offline-First 동기화 알고리즘 독자 빌드 및 실시간 SSE 스트리밍 답변 파이프라인 구축",
       ],
     },
   ];

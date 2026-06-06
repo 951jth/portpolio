@@ -1,6 +1,6 @@
 import FadeIn from "@/components/ui/FadeIn";
+import { Github, Mail, MapPin, Phone } from "lucide-react";
 import ContactForm from "./ContactForm";
-import { Mail, Phone, MapPin, Github, MessageSquare } from "lucide-react";
 
 export default function Contact() {
   const contactInfos = [
@@ -40,7 +40,7 @@ export default function Contact() {
           <FadeIn direction="up" delay={0.1}>
             <div className="w-16 h-1 bg-primary mx-auto rounded-full mb-4" />
             <p className="font-pretendard text-text-secondary text-sm sm:text-base max-w-md mx-auto">
-              기술 파트너십, 채용 제안 또는 가벼운 개발 티타임은 언제나 환영합니다.
+              새로운 제안이나 가벼운 커피챗 모두 환영합니다. 언제든 편하게 연락해 주세요.
             </p>
           </FadeIn>
         </div>
@@ -84,16 +84,6 @@ export default function Contact() {
                     aria-label="조세훈 깃허브 방문 (새 창 이동)"
                   >
                     <Github size={18} />
-                  </a>
-                  <a
-                    href="https://admitted-flamingo-2a3.notion.site/Engineering-Log-30159549cbc0800286f9faf3a378fda2"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="p-3 bg-outer hover:bg-secondary hover:text-white rounded-full text-text-secondary transition-all"
-                    title="Notion 상세 이력서 및 엔지니어링 로그"
-                    aria-label="조세훈 노션 상세 이력서 및 엔지니어링 로그 방문 (새 창 이동)"
-                  >
-                    <MessageSquare size={18} />
                   </a>
                 </div>
               </div>

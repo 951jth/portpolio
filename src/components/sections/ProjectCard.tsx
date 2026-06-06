@@ -1,6 +1,8 @@
 import Button from "@/components/ui/Button";
 import { ArrowUpRight, Github, Heart } from "lucide-react";
 
+export type ProjectTheme = "primary" | "secondary" | "blue" | "emerald" | "purple" | "orange" | "rose";
+
 export interface ProjectItem {
   title: string;
   category: string;
@@ -9,23 +11,33 @@ export interface ProjectItem {
   link?: string;
   github?: string;
   featured: boolean;
+  theme?: ProjectTheme;
 }
 
+const themeClasses: Record<ProjectTheme, { bar: string; badge: string; hoverBorder: string; titleHover: string }> = {
+  primary: { bar: "bg-primary", badge: "text-primary bg-primary/15", hoverBorder: "hover:border-primary/40", titleHover: "group-hover:text-primary" },
+  secondary: { bar: "bg-secondary", badge: "text-secondary bg-secondary/15", hoverBorder: "hover:border-secondary/40", titleHover: "group-hover:text-secondary" },
+  blue: { bar: "bg-sky-700", badge: "text-sky-700 bg-sky-700/15", hoverBorder: "hover:border-sky-700/40", titleHover: "group-hover:text-sky-700" },
+  emerald: { bar: "bg-teal-700", badge: "text-teal-800 bg-teal-700/15", hoverBorder: "hover:border-teal-700/40", titleHover: "group-hover:text-teal-700" },
+  purple: { bar: "bg-indigo-700", badge: "text-indigo-800 bg-indigo-700/15", hoverBorder: "hover:border-indigo-700/40", titleHover: "group-hover:text-indigo-700" },
+  orange: { bar: "bg-amber-700", badge: "text-amber-800 bg-amber-700/15", hoverBorder: "hover:border-amber-700/40", titleHover: "group-hover:text-amber-700" },
+  rose: { bar: "bg-rose-700", badge: "text-rose-800 bg-rose-700/15", hoverBorder: "hover:border-rose-700/40", titleHover: "group-hover:text-rose-700" },
+};
+
 export default function ProjectCard({ project }: { project: ProjectItem }) {
+  const currentTheme = project.theme || (project.featured ? "primary" : "secondary");
+  const styles = themeClasses[currentTheme];
+
   return (
-    <div className="group bg-surface rounded-3xl border border-outer/60 shadow-sm hover:shadow-xl hover:border-primary/40 transition-all duration-300 h-full flex flex-col justify-between overflow-hidden relative font-pretendard">
+    <div className={`group bg-surface rounded-3xl border border-outer/60 shadow-sm hover:shadow-xl ${styles.hoverBorder} transition-all duration-300 h-full flex flex-col justify-between overflow-hidden relative font-pretendard`}>
       {/* Visual Top Bar Accent */}
-      <div
-        className={`h-2.5 w-full ${
-          project.featured ? "bg-primary" : "bg-secondary"
-        }`}
-      />
+      <div className={`h-2.5 w-full ${styles.bar}`} />
 
       <div className="p-8 flex-1 flex flex-col justify-between">
         <div>
           {/* Category Label */}
           <div className="flex justify-between items-center mb-4">
-            <span className="text-xs font-semibold text-secondary bg-secondary/15 uppercase tracking-wider px-2.5 py-1 rounded-md">
+            <span className={`text-xs font-semibold uppercase tracking-wider px-2.5 py-1 rounded-md ${styles.badge}`}>
               {project.category}
             </span>
             {project.featured && (
@@ -37,7 +49,7 @@ export default function ProjectCard({ project }: { project: ProjectItem }) {
           </div>
 
           {/* Title */}
-          <h3 className="font-dohyeon text-xl sm:text-2xl text-text mb-3 group-hover:text-primary transition-colors flex items-center gap-2">
+          <h3 className={`font-dohyeon text-xl sm:text-2xl text-text mb-3 ${styles.titleHover} transition-colors flex items-center gap-2`}>
             <span>{project.title}</span>
           </h3>
 
