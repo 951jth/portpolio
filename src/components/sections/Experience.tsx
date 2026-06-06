@@ -13,6 +13,7 @@ export default function Experience() {
         "Web Worker와 SheetJS를 연동한 엑셀 클라이언트 스트리밍 구조 제안 및 최대 60만 건 대용량 통화 로그 다운로드 비용 절감 및 안정화",
         "Chrome Performance 프로파일링 및 가상 테이블(React Virtuoso) 컴포넌트화 도입으로 초기 렌더링 속도 90% 단축(2.8s ➡️ 0.3s) 및 DOM Node 97% 감소",
         "반복적인 폼 레이아웃 복잡성을 해소하기 위해 JSON 설정 기반의 선언적 폼 디자인 패턴 구축, LOC 평균 23% 개선",
+        "Next.js 기반 랜딩페이지의 메타데이터, 시맨틱 마크업, LCP 이미지 로딩 구조를 개선하여 Lighthouse Performance 59 ➡️ 91, SEO 91 ➡️ 100 달성",
       ],
     },
   ];
