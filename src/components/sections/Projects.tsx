@@ -7,7 +7,7 @@ const projects: ProjectItem[] = [
     category: "B2B Enterprise Admin Suite",
     theme: "blue",
     description:
-      "대량 회원 데이터를 동시 편집할 때 발생하는 렌더링 지연과 대형 컴포넌트 구조를 개선한 리팩토링 프로젝트입니다. Chrome Performance API 기반으로 Long Task 병목을 분석하고 React Virtuoso 기반 가상화 테이블로 로우를 렌더링 영역에만 격리하여 텍스트 입력 지연을 1860ms에서 28ms로 극대화 개선했습니다.",
+      "대량 회원 데이터를 동시 편집할 때 발생하는 렌더링 지연과 대형 컴포넌트 구조를 개선한 리팩토링 프로젝트입니다. Chrome Performance API 기반으로 Long Task 병목을 분석하고 React Virtuoso 기반 가상화 테이블로 로우를 렌더링 영역에만 격리하여 텍스트 입력 지연을 1860ms에서 28ms로 크게 개선했습니다.",
     tags: ["React", "CRA (Webpack)", "React Virtuoso", "Chrome Performance"],
     link: "https://admitted-flamingo-2a3.notion.site/Engineering-Log-30159549cbc0800286f9faf3a378fda2",
     featured: true,
@@ -36,7 +36,7 @@ const projects: ProjectItem[] = [
     category: "Personal AI Mobile App",
     theme: "rose",
     description:
-      "네트워크 단절 상황에서도 연속성을 완벽히 유지하는 Offline-First 구조의 1인 개발 모바일 애플리케이션입니다. 메시지 순번(SEQ) 기반 데이터 간극 탐지(Data Gap Detection) 로직 및 페이징 동기화를 구현하고 HTTP SSE 엔드포인트 연동으로 실시간 AI 답변 스트리밍 흐름을 단독 구축했습니다.",
+      "네트워크 단절 상황에서도 연속성을 유지하는 Offline-First 구조의 1인 개발 모바일 애플리케이션입니다. 메시지 순번(SEQ) 기반 데이터 간극 탐지(Data Gap Detection) 로직 및 페이징 동기화를 구현하고 HTTP SSE 엔드포인트 연동으로 실시간 AI 답변 스트리밍 흐름을 단독 구축했습니다.",
     tags: ["React Native (CLI)", "TypeScript", "SQLite", "Firebase", "OpenAI"],
     link: "https://admitted-flamingo-2a3.notion.site/Engineering-Log-30159549cbc0800286f9faf3a378fda2",
     github: "https://github.com/951jth/pandytalk",
@@ -58,7 +58,7 @@ export default function Projects() {
           <FadeIn direction="up" delay={0.1}>
             <div className="w-16 h-1 bg-primary mx-auto rounded-full mb-4" />
             <p className="font-pretendard text-text-secondary text-sm sm:text-base max-w-md mx-auto">
-              기술적 완성도와 더불어 디자인 시스템을 통해 사용자 감동을 이끌어
+              기술적 완성도와 더불어 디자인 시스템을 통해 사용자 경험을 이끌어
               낸 핵심 작업들입니다.
             </p>
           </FadeIn>
