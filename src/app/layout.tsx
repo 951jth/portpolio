@@ -30,6 +30,7 @@ const doHyeon = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://csh-portfolio.com"),
   title: "조세훈 | 프론트엔드 엔지니어 포트폴리오",
   description: "성능 최적화와 사용자 경험 개선에 집중하는 6년 차 프론트엔드 엔지니어 조세훈의 포트폴리오입니다. React, Next.js 등의 기술 스택과 대용량 데이터 처리 경험을 소개합니다.",
   keywords: ["조세훈", "프론트엔드", "엔지니어", "개발자", "포트폴리오", "React", "Next.js", "TypeScript", "React Native", "성능최적화", "대용량데이터"],
@@ -39,6 +40,20 @@ export const metadata: Metadata = {
     description: "성능 최적화와 사용자 경험 개선에 집중하는 프론트엔드 엔지니어 조세훈의 포트폴리오 웹사이트입니다.",
     type: "website",
     locale: "ko_KR",
+    images: [
+      {
+        url: "/assets/images/profile.webp",
+        width: 800,
+        height: 800,
+        alt: "조세훈 프로필 사진",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "조세훈 | 프론트엔드 엔지니어 포트폴리오",
+    description: "성능 최적화와 사용자 경험 개선에 집중하는 프론트엔드 엔지니어 조세훈의 포트폴리오 웹사이트입니다.",
+    images: ["/assets/images/profile.webp"],
   },
 };
 

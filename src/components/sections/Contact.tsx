@@ -71,11 +71,11 @@ export default function Contact() {
 
                 <div className="border-t border-outer/40 pt-8 mt-8 flex gap-4 justify-start">
                   <a
-                    href="https://github.com/951jth/pandytalk"
+                    href="https://github.com/951jth/portpolio"
                     target="_blank"
                     rel="noreferrer"
                     className="p-3 bg-outer hover:bg-primary hover:text-white rounded-full text-text-secondary transition-all"
-                    aria-label="조세훈 깃허브 방문 (새 창 이동)"
+                    aria-label="포트폴리오 소스코드 깃허브 방문 (새 창 이동)"
                   >
                     <Github size={18} />
                   </a>
