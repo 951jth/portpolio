@@ -17,7 +17,7 @@ export default function Navbar() {
           href="#hero"
           className="font-dohyeon text-2xl tracking-wide text-text hover:text-primary transition-colors"
         >
-          조세훈.
+          조세훈
         </a>
 
         {/* Desktop Navigation */}
