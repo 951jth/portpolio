@@ -33,7 +33,7 @@ export default function ProjectCard({ project }: { project: ProjectItem }) {
       {/* Visual Top Bar Accent */}
       <div className={`h-2.5 w-full ${styles.bar}`} />
 
-      <div className="p-8 flex-1 flex flex-col justify-between">
+      <div className="p-5 flex-1 flex flex-col justify-between">
         <div>
           {/* Category Label */}
           <div className="flex justify-between items-center mb-4">
