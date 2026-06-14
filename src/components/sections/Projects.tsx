@@ -6,8 +6,16 @@ const projects: ProjectItem[] = [
     title: "Mozzle (대용량 회원명부 관리 시스템 리팩토링)",
     category: "B2B Enterprise Admin Suite",
     theme: "blue",
-    description:
-      "대량 회원 데이터를 동시 편집할 때 발생하는 렌더링 지연과 대형 컴포넌트 구조를 개선한 리팩토링 프로젝트입니다. Chrome Performance API 기반으로 Long Task 병목을 분석하고 React Virtuoso 기반 가상화 테이블로 로우를 렌더링 영역에만 격리하여 텍스트 입력 지연을 1860ms에서 28ms로 크게 개선했습니다.",
+    description: (
+      <ul className="list-disc pl-4 space-y-1.5 marker:text-sky-600">
+        <li>
+          <strong className="text-text">대규모 렌더링 지연 및 구조 리팩토링:</strong> 대량의 회원 데이터를 동시 편집할 때 발생하는 렌더링 지연 문제와 비대해진 컴포넌트 구조 개선
+        </li>
+        <li>
+          <strong className="text-text">가상화 기반 렌더링 성능 최적화:</strong> Chrome Performance API로 Long Task 병목을 분석하고, React Virtuoso 기반 가상화 테이블을 적용하여 텍스트 입력 지연을 1860ms에서 28ms로 대폭 단축
+        </li>
+      </ul>
+    ),
     tags: ["React", "CRA (Webpack)", "React Virtuoso", "Chrome Performance"],
     link: "https://admitted-flamingo-2a3.notion.site/Engineering-Log-30159549cbc0800286f9faf3a378fda2",
     featured: true,
@@ -16,8 +24,16 @@ const projects: ProjectItem[] = [
     title: "050 BizCall 관리자 웹 - 대용량 엑셀 다운로드 개선",
     category: "B2B Telecom Back-Office",
     theme: "emerald",
-    description:
-      "30만 건 이상의 방대한 통화 내역 다운로드 시 발생하는 서버 OOM(메모리 부족) 및 지연 문제를 해결하기 위한 아키텍처 재설계입니다. 생성 책임을 서버에서 클라이언트로 이전하고 Web Worker 기반 백그라운드 스레드에서 SheetJS를 활용해 연속 페이징 수신 방식으로 무중단 60만 건 다운로드 안정화 달성하였습니다.",
+    description: (
+      <ul className="list-disc pl-4 space-y-1.5 marker:text-teal-600">
+        <li>
+          <strong className="text-text">대용량 엑셀 다운로드 구조 개선:</strong> 엑셀 생성 책임을 서버에서 클라이언트로 이관하여 서버 부하 및 API 지연 문제 해결. Web Worker 및 ZIP 분할 압축 적용으로 80만 건 다운로드 처리 시간 33% 단축 (27분 → 18분)
+        </li>
+        <li>
+          <strong className="text-text">랜딩페이지 SEO 및 성능 최적화:</strong> Next.js 메타데이터 구조, 시맨틱 마크업 최적화로 Lighthouse 성능(59 → 91) 및 SEO 점수(100) 달성. 검색 노출수 53%, 클릭수 14% 증가
+        </li>
+      </ul>
+    ),
     tags: ["React", "SheetJS", "Web Worker", "ZIP Compression"],
     link: "https://admitted-flamingo-2a3.notion.site/Engineering-Log-30159549cbc0800286f9faf3a378fda2",
     featured: true,
@@ -26,8 +42,16 @@ const projects: ProjectItem[] = [
     title: "Payking - PG 결제 링크 서비스 및 통합 관리자",
     category: "Fintech Platform",
     theme: "purple",
-    description:
-      "소상공인을 위한 비대면 SMS/URL 결제 링크 서비스 및 백오피스 시스템 프론트엔드 아키텍처입니다. 기존 3단계 입력 폼을 2단계 선언적 JSON 폼 구조로 개선하여 폼 관련 LOC 23% 평균 감소를 달성했으며 CSS Grid 기반 반응형 웹 레이아웃으로 디자인 시안 전면 대응 속도를 극대화했습니다.",
+    description: (
+      <ul className="list-disc pl-4 space-y-1.5 marker:text-indigo-600">
+        <li>
+          <strong className="text-text">결제 폼 프론트엔드 아키텍처 개선:</strong> 소상공인을 위한 비대면 결제 서비스에서 기존 3단계 폼을 2단계 선언적 JSON 폼 구조로 개편하여 폼 관련 코드(LOC) 23% 감소
+        </li>
+        <li>
+          <strong className="text-text">반응형 웹 레이아웃 최적화:</strong> CSS Grid 기반 구조를 도입하여 다양한 기기와 디자인 시안에 대한 프론트엔드 대응 속도 극대화
+        </li>
+      </ul>
+    ),
     tags: ["React", "Next.js (SSR)", "React Native", "Tailwind CSS"],
     featured: false,
   },
@@ -35,8 +59,16 @@ const projects: ProjectItem[] = [
     title: "PandyTalk - AI 비서 오프라인 퍼스트 채팅 앱",
     category: "Personal AI Mobile App",
     theme: "rose",
-    description:
-      "네트워크 단절 상황에서도 연속성을 유지하는 Offline-First 구조의 1인 개발 모바일 애플리케이션입니다. 메시지 순번(SEQ) 기반 데이터 간극 탐지(Data Gap Detection) 로직 및 페이징 동기화를 구현하고 HTTP SSE 엔드포인트 연동으로 실시간 AI 답변 스트리밍 흐름을 단독 구축했습니다.",
+    description: (
+      <ul className="list-disc pl-4 space-y-1.5 marker:text-rose-600">
+        <li>
+          <strong className="text-text">오프라인 퍼스트(Offline-First) 동기화:</strong> 네트워크 단절 시에도 연속성을 보장하기 위해 메시지 순번(SEQ) 기반 데이터 간극 탐지(Data Gap Detection) 및 로컬 페이징 동기화 구현
+        </li>
+        <li>
+          <strong className="text-text">실시간 AI 스트리밍 구축:</strong> HTTP SSE 엔드포인트 연동을 통해 끊김 없는 실시간 AI 답변 스트리밍 통신 흐름 단독 구축
+        </li>
+      </ul>
+    ),
     tags: ["React Native (CLI)", "TypeScript", "SQLite", "Firebase", "OpenAI"],
     link: "https://admitted-flamingo-2a3.notion.site/Engineering-Log-30159549cbc0800286f9faf3a378fda2",
     github: "https://github.com/951jth/pandytalk",

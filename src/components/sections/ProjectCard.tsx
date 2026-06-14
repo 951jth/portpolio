@@ -6,7 +6,7 @@ export type ProjectTheme = "primary" | "secondary" | "blue" | "emerald" | "purpl
 export interface ProjectItem {
   title: string;
   category: string;
-  description: string;
+  description: React.ReactNode;
   tags: string[];
   link?: string;
   github?: string;
@@ -54,9 +54,9 @@ export default function ProjectCard({ project }: { project: ProjectItem }) {
           </h3>
 
           {/* Description */}
-          <p className="text-text-secondary text-xs sm:text-sm leading-relaxed mb-6">
+          <div className="text-text-secondary text-xs sm:text-sm leading-relaxed mb-6">
             {project.description}
-          </p>
+          </div>
         </div>
 
         <div>
