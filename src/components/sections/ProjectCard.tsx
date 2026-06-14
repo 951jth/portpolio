@@ -1,12 +1,12 @@
 import Button from "@/components/ui/Button";
-import { ArrowUpRight, Github, Heart } from "lucide-react";
+import { ArrowUpRight, Github } from "lucide-react";
 
 export type ProjectTheme = "primary" | "secondary" | "blue" | "emerald" | "purple" | "orange" | "rose";
 
 export interface ProjectItem {
   title: string;
   category: string;
-  description: React.ReactNode;
+  description: React.ReactNode | React.ReactNode[];
   tags: string[];
   link?: string;
   github?: string;
@@ -14,14 +14,14 @@ export interface ProjectItem {
   theme?: ProjectTheme;
 }
 
-const themeClasses: Record<ProjectTheme, { bar: string; badge: string; hoverBorder: string; titleHover: string }> = {
-  primary: { bar: "bg-primary", badge: "text-primary bg-primary/15", hoverBorder: "hover:border-primary/40", titleHover: "group-hover:text-primary" },
-  secondary: { bar: "bg-secondary", badge: "text-secondary bg-secondary/15", hoverBorder: "hover:border-secondary/40", titleHover: "group-hover:text-secondary" },
-  blue: { bar: "bg-sky-700", badge: "text-sky-700 bg-sky-700/15", hoverBorder: "hover:border-sky-700/40", titleHover: "group-hover:text-sky-700" },
-  emerald: { bar: "bg-teal-700", badge: "text-teal-800 bg-teal-700/15", hoverBorder: "hover:border-teal-700/40", titleHover: "group-hover:text-teal-700" },
-  purple: { bar: "bg-indigo-700", badge: "text-indigo-800 bg-indigo-700/15", hoverBorder: "hover:border-indigo-700/40", titleHover: "group-hover:text-indigo-700" },
-  orange: { bar: "bg-amber-700", badge: "text-amber-800 bg-amber-700/15", hoverBorder: "hover:border-amber-700/40", titleHover: "group-hover:text-amber-700" },
-  rose: { bar: "bg-rose-700", badge: "text-rose-800 bg-rose-700/15", hoverBorder: "hover:border-rose-700/40", titleHover: "group-hover:text-rose-700" },
+const themeClasses: Record<ProjectTheme, { bar: string; badge: string; hoverBorder: string; titleHover: string; marker: string }> = {
+  primary: { bar: "bg-primary", badge: "text-primary bg-primary/15", hoverBorder: "hover:border-primary/40", titleHover: "group-hover:text-primary", marker: "text-primary" },
+  secondary: { bar: "bg-secondary", badge: "text-secondary bg-secondary/15", hoverBorder: "hover:border-secondary/40", titleHover: "group-hover:text-secondary", marker: "text-secondary" },
+  blue: { bar: "bg-sky-700", badge: "text-sky-700 bg-sky-700/15", hoverBorder: "hover:border-sky-700/40", titleHover: "group-hover:text-sky-700", marker: "text-sky-600" },
+  emerald: { bar: "bg-teal-700", badge: "text-teal-800 bg-teal-700/15", hoverBorder: "hover:border-teal-700/40", titleHover: "group-hover:text-teal-700", marker: "text-teal-600" },
+  purple: { bar: "bg-indigo-700", badge: "text-indigo-800 bg-indigo-700/15", hoverBorder: "hover:border-indigo-700/40", titleHover: "group-hover:text-indigo-700", marker: "text-indigo-600" },
+  orange: { bar: "bg-amber-700", badge: "text-amber-800 bg-amber-700/15", hoverBorder: "hover:border-amber-700/40", titleHover: "group-hover:text-amber-700", marker: "text-amber-600" },
+  rose: { bar: "bg-rose-700", badge: "text-rose-800 bg-rose-700/15", hoverBorder: "hover:border-rose-700/40", titleHover: "group-hover:text-rose-700", marker: "text-rose-600" },
 };
 
 export default function ProjectCard({ project }: { project: ProjectItem }) {
@@ -40,12 +40,12 @@ export default function ProjectCard({ project }: { project: ProjectItem }) {
             <span className={`text-xs font-semibold uppercase tracking-wider px-2.5 py-1 rounded-md ${styles.badge}`}>
               {project.category}
             </span>
-            {project.featured && (
+            {/* {project.featured && (
               <span className="text-[10px] text-accent-deep bg-accent-light px-2 py-0.5 rounded-full font-bold flex items-center gap-1">
                 <Heart size={10} fill="currentColor" />
                 <span>대표 프로젝트</span>
               </span>
-            )}
+            )} */}
           </div>
 
           {/* Title */}
@@ -55,7 +55,15 @@ export default function ProjectCard({ project }: { project: ProjectItem }) {
 
           {/* Description */}
           <div className="text-text-secondary text-xs sm:text-sm leading-relaxed mb-6">
-            {project.description}
+            {Array.isArray(project.description) ? (
+              <ul className={`list-disc pl-4 space-y-1.5 marker:${styles.marker}`}>
+                {project.description.map((desc, idx) => (
+                  <li key={idx}>{desc}</li>
+                ))}
+              </ul>
+            ) : (
+              project.description
+            )}
           </div>
         </div>
 
