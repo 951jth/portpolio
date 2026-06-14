@@ -9,6 +9,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 - 커밋 메시지는 Conventional Commits 형식을 따른다.
 - 커밋 메시지의 설명은 한글로 작성한다. 예: `perf: 폰트와 히어로 에셋 최적화`
+- 커밋 커맨드를 생성할 때, 프로젝트에서 텍스트가 변경되었다면 폰트 서브셋 명령어를 사용하도록 안내한다.
 <!-- END:project-rules -->
 
 <!-- BEGIN:deployment-rules -->
