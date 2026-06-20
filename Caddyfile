@@ -1,5 +1,4 @@
-# 접속을 허용할 도메인 주소들 (Caddy가 알아서 HTTPS 인증서를 발급받고 갱신합니다)
 csh-portfolio.com, www.csh-portfolio.com {
-	# 위 도메인으로 들어온 요청을 도커 마을 내의 'portfolio' 컨테이너(3000포트)로 우회시켜 전달합니다
+	encode zstd gzip
 	reverse_proxy portfolio:3000
 }
