@@ -58,10 +58,13 @@ jobs:
       # 1. 사전에 등록한 Secrets 정보를 이용해 EC2 서버에 SSH로 원격 접속합니다.
       - name: Deploy to EC2 via SSH
         uses: appleboy/ssh-action@v1.0.3
+        env:
+          PANDYTALK_WEBHOOK_URL: ${{ secrets.PANDYTALK_WEBHOOK_URL }}
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
+          envs: PANDYTALK_WEBHOOK_URL
           script: |
             set -e
 
@@ -90,7 +93,6 @@ jobs:
             git checkout ${{ github.ref_name }}
             git pull --ff-only origin ${{ github.ref_name }}
 
-            PANDYTALK_WEBHOOK_URL='${{ secrets.PANDYTALK_WEBHOOK_URL }}'
             if [ -z "$PANDYTALK_WEBHOOK_URL" ]; then
               echo "Missing GitHub Actions secret: PANDYTALK_WEBHOOK_URL"
               exit 1
