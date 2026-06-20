@@ -20,11 +20,12 @@ services:
     restart: unless-stopped
     expose:
       - "3000"
+    env_file:
+      - .env.production
     environment:
       NODE_ENV: production
       PORT: "3000"
       HOSTNAME: 0.0.0.0
-      PANDYTALK_WEBHOOK_URL: ${PANDYTALK_WEBHOOK_URL:-}
 
 
 volumes:

@@ -89,6 +89,13 @@ jobs:
             git fetch origin ${{ github.ref_name }}
             git checkout ${{ github.ref_name }}
             git pull --ff-only origin ${{ github.ref_name }}
+
+            PANDYTALK_WEBHOOK_URL='${{ secrets.PANDYTALK_WEBHOOK_URL }}'
+            if [ -z "$PANDYTALK_WEBHOOK_URL" ]; then
+              echo "Missing GitHub Actions secret: PANDYTALK_WEBHOOK_URL"
+              exit 1
+            fi
+            printf 'PANDYTALK_WEBHOOK_URL=%s\n' "$PANDYTALK_WEBHOOK_URL" > .env.production
             
             # 2. GHCR에서 방금 빌드된 따끈따끈한 최신 이미지를 다운로드(Pull) 합니다.
             docker pull ghcr.io/951jth/portpolio:latest
