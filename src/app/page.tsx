@@ -2,6 +2,7 @@ import dynamic from "next/dynamic";
 import Navbar from "@/components/layout/Navbar";
 import Hero from "@/components/sections/Hero";
 import Skills from "@/components/sections/Skills";
+import { portfolioJsonLd } from "@/lib/jsonLd/portfolio";
 
 const Experience = dynamic(() => import("@/components/sections/Experience"));
 const Projects = dynamic(() => import("@/components/sections/Projects"));
@@ -10,6 +11,10 @@ const Contact = dynamic(() => import("@/components/sections/Contact"));
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(portfolioJsonLd) }}
+      />
       {/* Floating Translucent Navbar */}
       <Navbar />
 
