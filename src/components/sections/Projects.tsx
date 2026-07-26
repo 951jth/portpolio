@@ -81,9 +81,8 @@ export default function Projects() {
           </FadeIn>
           <FadeIn direction="up" delay={0.1}>
             <div className="w-16 h-1 bg-primary mx-auto rounded-full mb-4" />
-            <p className="font-pretendard text-text-secondary text-sm sm:text-base max-w-md mx-auto">
-              성능을 측정하고 구조를 개선하여 사용자 경험을 개선한 핵심
-              작업들입니다.
+            <p className="font-pretendard text-text-secondary text-sm sm:text-base max-w-2xl mx-auto md:whitespace-nowrap">
+              성능을 측정하고 구조를 개선하여 사용자 경험을 개선한 핵심 작업들입니다.
             </p>
           </FadeIn>
         </div>

@@ -4,6 +4,11 @@ import Button from "@/components/ui/Button";
 import Image from "next/image";
 import { ArrowRight, Download, Sparkles, ExternalLink } from "lucide-react";
 
+const RESUME_PDF_URL =
+  "https://docs.google.com/document/d/1aWGf-6Tgze3N-VzcidnTqmzwM9TtrAYkS2a5lZcDRWA/export?format=pdf";
+const CAREER_DESCRIPTION_PDF_URL =
+  "https://docs.google.com/document/d/1M0ppSNysFYF1NTTet08LGnsarapuSH_SCuOgxsU0V84/export?format=pdf";
+
 export default function Hero() {
   return (
     <section
@@ -105,24 +110,24 @@ export default function Hero() {
           <FadeIn direction="up" delay={0.5}>
             <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start items-center mt-6 w-full">
               <Button
-                href={process.env.NEXT_PUBLIC_RESUME_URL || "/docs/조세훈_이력서_20260507.pdf"}
-                download
+                href={RESUME_PDF_URL}
+                target="_blank"
                 variant="ghost"
                 size="sm"
                 className="w-full sm:w-auto"
                 icon={<Download size={14} />}
-                aria-label="조세훈 이력서 PDF 다운로드"
+                aria-label="조세훈 최신 이력서 PDF 다운로드"
               >
                 이력서 다운로드
               </Button>
               <Button
-                href={process.env.NEXT_PUBLIC_COVER_LETTER_URL || "/docs/조세훈_경력기술서_20260419.pdf"}
-                download
+                href={CAREER_DESCRIPTION_PDF_URL}
+                target="_blank"
                 variant="ghost"
                 size="sm"
                 className="w-full sm:w-auto"
                 icon={<Download size={14} />}
-                aria-label="조세훈 경력기술서 PDF 다운로드"
+                aria-label="조세훈 최신 경력기술서 PDF 다운로드"
               >
                 경력기술서 다운로드
               </Button>
