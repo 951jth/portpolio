@@ -5,7 +5,6 @@ on:
   push:
     branches:
       - master # master 브랜치에 코드가 푸시(push)될 때 실행됩니다.
-      - main   # main 브랜치에 코드가 푸시될 때도 실행됩니다. (둘 중 존재하는 브랜치 기준)
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true # Node.js 20 지원 종료 경고 해결용 환경변수
@@ -46,6 +45,8 @@ jobs:
           tags: |
             ghcr.io/951jth/portpolio:latest
             ghcr.io/951jth/portpolio:${{ github.sha }}
+          build-args: |
+            NEXT_PUBLIC_NOTION_URL=${{ secrets.NEXT_PUBLIC_NOTION_URL }}
           cache-from: type=gha # 이전에 빌드했던 캐시를 가져와 빌드 속도를 매우 빠르게 단축시킴
           cache-to: type=gha,mode=max # 이번 빌드 결과를 캐시로 저장함
 
@@ -60,11 +61,12 @@ jobs:
         uses: appleboy/ssh-action@v1.0.3
         env:
           PANDYTALK_WEBHOOK_URL: ${{ secrets.PANDYTALK_WEBHOOK_URL }}
+          NEXT_PUBLIC_NOTION_URL: ${{ secrets.NEXT_PUBLIC_NOTION_URL }}
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
-          envs: PANDYTALK_WEBHOOK_URL
+          envs: PANDYTALK_WEBHOOK_URL, NEXT_PUBLIC_NOTION_URL
           script: |
             set -e
 
@@ -97,7 +99,12 @@ jobs:
               echo "Missing GitHub Actions secret: PANDYTALK_WEBHOOK_URL"
               exit 1
             fi
+            if [ -z "$NEXT_PUBLIC_NOTION_URL" ]; then
+              echo "Missing GitHub Actions secret: NEXT_PUBLIC_NOTION_URL"
+              exit 1
+            fi
             printf 'PANDYTALK_WEBHOOK_URL=%s\n' "$PANDYTALK_WEBHOOK_URL" > .env.production
+            printf 'NEXT_PUBLIC_NOTION_URL=%s\n' "$NEXT_PUBLIC_NOTION_URL" >> .env.production
             
             # 2. GHCR에서 방금 빌드된 따끈따끈한 최신 이미지를 다운로드(Pull) 합니다.
             docker pull ghcr.io/951jth/portpolio:latest

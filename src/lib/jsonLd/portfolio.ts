@@ -43,7 +43,7 @@ export const portfolioJsonLd = {
       sameAs: [
         "https://github.com/951jth/portpolio",
         "https://github.com/951jth/pandytalk",
-        "https://admitted-flamingo-2a3.notion.site/Engineering-Log-30159549cbc0800286f9faf3a378fda2",
+        process.env.NEXT_PUBLIC_NOTION_URL || "",
       ],
     },
     {

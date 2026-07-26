@@ -15,7 +15,7 @@ const projects: ProjectItem[] = [
       </>
     ],
     tags: ["React", "CRA (Webpack)", "React Virtuoso", "Chrome Performance"],
-    link: "https://admitted-flamingo-2a3.notion.site/Engineering-Log-30159549cbc0800286f9faf3a378fda2",
+    link: process.env.NEXT_PUBLIC_NOTION_URL || "",
     featured: true,
   },
   {
@@ -31,7 +31,7 @@ const projects: ProjectItem[] = [
       </>
     ],
     tags: ["React", "SheetJS", "Web Worker", "ZIP Compression"],
-    link: "https://admitted-flamingo-2a3.notion.site/Engineering-Log-30159549cbc0800286f9faf3a378fda2",
+    link: process.env.NEXT_PUBLIC_NOTION_URL || "",
     featured: true,
   },
   {
@@ -62,7 +62,7 @@ const projects: ProjectItem[] = [
       </>
     ],
     tags: ["React Native (CLI)", "TypeScript", "SQLite", "Firebase", "OpenAI"],
-    link: "https://admitted-flamingo-2a3.notion.site/Engineering-Log-30159549cbc0800286f9faf3a378fda2",
+    link: process.env.NEXT_PUBLIC_NOTION_URL || "",
     github: "https://github.com/951jth/pandytalk",
     featured: false,
   },

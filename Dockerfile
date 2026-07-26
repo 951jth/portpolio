@@ -34,6 +34,10 @@ COPY --from=deps /app/node_modules ./node_modules
 # 현재 builder 단계의 작업 폴더(/app)로 복사합니다.
 COPY . .
 
+# Next.js 클라이언트 환경변수를 빌드 시점에 주입하기 위해 ARG 및 ENV 설정
+ARG NEXT_PUBLIC_NOTION_URL
+ENV NEXT_PUBLIC_NOTION_URL=$NEXT_PUBLIC_NOTION_URL
+
 # RUN npm run build :
 # package.json의 build 스크립트를 실행해서 Next.js 프로덕션 빌드를 만듭니다.
 # next.config.ts의 output: "standalone" 설정에 따라

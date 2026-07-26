@@ -10,7 +10,7 @@
 - [cite_start]**Email:** tpgnsjth@gmail.com [cite: 2, 111, 218]
 - [cite_start]**Phone:** +82 10-8968-9274 [cite: 2, 110, 218]
 - [cite_start]**GitHub:** [github.com/951jth/pandytalk](https://github.com/951jth/pandytalk) [cite: 112, 218]
-- [cite_start]**Notion Portfolio:** [상세 프로젝트 아키텍처 및 엔지니어링 로그](https://admitted-flamingo-2a3.notion.site/Engineering-Log-30159549cbc0800286f9faf3a378fda2) [cite: 103]
+- [cite_start]**Notion Portfolio:** [상세 프로젝트 아키텍처 및 엔지니어링 로그](https://app.notion.com/p/3a859549cbc080bcb9f6ecbecbd7ae87) [cite: 103]
 
 ---
 
