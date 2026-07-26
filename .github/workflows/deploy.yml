@@ -62,11 +62,13 @@ jobs:
         env:
           PANDYTALK_WEBHOOK_URL: ${{ secrets.PANDYTALK_WEBHOOK_URL }}
           NEXT_PUBLIC_NOTION_URL: ${{ secrets.NEXT_PUBLIC_NOTION_URL }}
+          NEXT_PUBLIC_RESUME_URL: ${{ secrets.NEXT_PUBLIC_RESUME_URL }}
+          NEXT_PUBLIC_COVER_LETTER_URL: ${{ secrets.NEXT_PUBLIC_COVER_LETTER_URL }}
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
-          envs: PANDYTALK_WEBHOOK_URL,NEXT_PUBLIC_NOTION_URL
+          envs: PANDYTALK_WEBHOOK_URL,NEXT_PUBLIC_NOTION_URL,NEXT_PUBLIC_RESUME_URL,NEXT_PUBLIC_COVER_LETTER_URL
           script: |
             set -e
 
@@ -105,6 +107,12 @@ jobs:
             fi
             printf 'PANDYTALK_WEBHOOK_URL=%s\n' "$PANDYTALK_WEBHOOK_URL" > .env.production
             printf 'NEXT_PUBLIC_NOTION_URL=%s\n' "$NEXT_PUBLIC_NOTION_URL" >> .env.production
+            if [ -n "$NEXT_PUBLIC_RESUME_URL" ]; then
+              printf 'NEXT_PUBLIC_RESUME_URL=%s\n' "$NEXT_PUBLIC_RESUME_URL" >> .env.production
+            fi
+            if [ -n "$NEXT_PUBLIC_COVER_LETTER_URL" ]; then
+              printf 'NEXT_PUBLIC_COVER_LETTER_URL=%s\n' "$NEXT_PUBLIC_COVER_LETTER_URL" >> .env.production
+            fi
             
             # 2. GHCR에서 방금 빌드된 따끈따끈한 최신 이미지를 다운로드(Pull) 합니다.
             docker pull ghcr.io/951jth/portpolio:latest

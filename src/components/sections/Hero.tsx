@@ -105,7 +105,7 @@ export default function Hero() {
           <FadeIn direction="up" delay={0.5}>
             <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start items-center mt-6 w-full">
               <Button
-                href="/docs/조세훈_이력서_20260507.pdf"
+                href={process.env.NEXT_PUBLIC_RESUME_URL || "/docs/조세훈_이력서_20260507.pdf"}
                 download
                 variant="ghost"
                 size="sm"
@@ -116,7 +116,7 @@ export default function Hero() {
                 이력서 다운로드
               </Button>
               <Button
-                href="/docs/조세훈_경력기술서_20260419.pdf"
+                href={process.env.NEXT_PUBLIC_COVER_LETTER_URL || "/docs/조세훈_경력기술서_20260419.pdf"}
                 download
                 variant="ghost"
                 size="sm"
