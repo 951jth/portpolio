@@ -8,12 +8,12 @@ export default function Experience() {
       role: "프론트엔드 엔지니어 대리 (Frontend Engineer)",
       period: "2021.05 ~ 현재",
       description:
-        "B2B 050 가상번호 통신 플랫폼(BizCall) 관리자 웹, 결제 솔루션(Payking), 운영 시스템 개발 및 리팩토링을 전담했습니다.",
+        "B2B 050 가상번호 통신 플랫폼(BizCall) 관리자 웹, 결제 솔루션(Payking), 운영 시스템 개발 및 리팩토링을 담당했습니다.",
       achievements: [
-        "Web Worker와 SheetJS를 연동한 엑셀 클라이언트 스트리밍 구조 제안 및 최대 60만 건 대용량 통화 로그 다운로드 비용 절감 및 안정화",
-        "Chrome Performance 프로파일링 및 가상 테이블(React Virtuoso) 컴포넌트화 도입으로 초기 렌더링 속도 90% 단축(2.8s ➡️ 0.3s) 및 DOM Node 97% 감소",
-        "반복적인 폼 레이아웃 복잡성을 해소하기 위해 JSON 설정 기반의 선언적 폼 디자인 패턴 구축, LOC 평균 23% 개선",
-        "Next.js 기반 메타데이터, 시맨틱 마크업 및 LCP 이미지 로딩 구조를 개선하여 Lighthouse 성능(59 → 91) 및 SEO(91 → 100) 대폭 향상, 자연 검색 노출수 53% 및 클릭수 14% 증가",
+        "엑셀 생성 책임을 클라이언트로 분산하고 API 병렬 요청, Web Worker 및 분할 ZIP 구조를 적용하여 최대 80만 건까지 처리 범위를 확장하고, 20.5만 건 기준 1차 개선 구조 대비 처리 시간을 150.8초에서 90.8초로 약 40% 단축",
+        "Chrome Performance 프로파일링과 React Virtuoso 기반 가상화를 적용하여 초기 UI 렌더링 시간을 4.9초에서 0.14초로 97% 단축하고, DOM Node를 기존 64,458개 대비 2,306~5,103개 수준으로 감소",
+        "반복적인 폼 레이아웃 복잡성을 줄이기 위해 JSON 설정 기반의 선언적 폼 구조를 적용하여 주요 관리자 입력 페이지 LOC를 평균 약 23% 절감",
+        "Next.js 기반 메타데이터, 시맨틱 마크업 및 LCP 이미지 로딩 구조를 개선하여 Lighthouse 성능을 59에서 91, SEO를 91에서 100으로 개선하고, Search Console 한 달 비교 기준 노출수 53% 및 클릭수 14% 증가",
       ],
     },
   ];
@@ -31,7 +31,7 @@ export default function Experience() {
           <FadeIn direction="up" delay={0.1}>
             <div className="w-16 h-1 bg-primary mx-auto rounded-full mb-4" />
             <p className="font-pretendard text-text-secondary text-sm sm:text-base max-w-md mx-auto">
-              기술을 통해 비즈니스 문제를 해결하고, 실제 수치로 성과를 입증해 온 저의 성장 여정입니다.
+              기술을 통해 비즈니스 문제를 해결하고, 실제 수치로 개선 결과를 검증해 온 성장 여정입니다.
             </p>
           </FadeIn>
         </div>
