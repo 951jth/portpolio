@@ -1,4 +1,5 @@
 import Button from "@/components/ui/Button";
+import VideoButton from "@/components/ui/VideoButton";
 import { ArrowUpRight, Github } from "lucide-react";
 
 export type ProjectTheme = "primary" | "secondary" | "blue" | "emerald" | "purple" | "orange" | "rose";
@@ -10,6 +11,8 @@ export interface ProjectItem {
   tags: string[];
   link?: string;
   github?: string;
+  video?: string;
+  videoRatio?: "16:9" | "9:16";
   featured: boolean;
   theme?: ProjectTheme;
 }
@@ -82,6 +85,13 @@ export default function ProjectCard({ project }: { project: ProjectItem }) {
 
           {/* Actions */}
           <div className="flex gap-3 items-center border-t border-outer/30 pt-6">
+            {project.video && (
+              <VideoButton 
+                videoId={project.video} 
+                title={project.title} 
+                videoRatio={project.videoRatio} 
+              />
+            )}
             {project.link && <Button
               href={project.link}
               target="_blank"

@@ -16,6 +16,8 @@ const projects: ProjectItem[] = [
     ],
     tags: ["React", "CRA (Webpack)", "React Virtuoso", "Chrome Performance"],
     link: process.env.NEXT_PUBLIC_NOTION_URL || "",
+    video: "Cj3J-v1gLcI",
+    videoRatio: "16:9",
     featured: true,
   },
   {
@@ -64,6 +66,8 @@ const projects: ProjectItem[] = [
     tags: ["React Native (CLI)", "TypeScript", "SQLite", "Firebase", "OpenAI"],
     link: process.env.NEXT_PUBLIC_NOTION_URL || "",
     github: "https://github.com/951jth/pandytalk",
+    video: "Kf3jksOo_W4",
+    videoRatio: "9:16",
     featured: false,
   },
 ];
