@@ -42,7 +42,7 @@ const projects: ProjectItem[] = [
     theme: "purple",
     description: [
       <>
-        <strong className="text-text">관리자 입력 폼 공통 컴포넌트 구조 제안:</strong> 기존 단순 JSX 나열 방식에서 JSON 기반의 선언적 스키마 폼 구조로 개선하여 폼 관련 코드(LOC) 23% 감소
+        <strong className="text-text">관리자 입력 폼 공통 컴포넌트 구조 제안:</strong> 기존 단순 JSX 나열 방식에서 JSON 기반의 선언적 스키마 폼 구조로 개선하여 폼 관련 코드(LOC) 20% 감소
       </>,
       <>
         <strong className="text-text">반응형 웹 레이아웃 개선:</strong> CSS Grid 기반 공통 구조를 적용하여 디자인 시안 변경 시 폼 구조 수정 없이 설정과 레이아웃 값 변경으로 대응
