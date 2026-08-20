@@ -1,6 +1,13 @@
 import FadeIn from "@/components/ui/FadeIn";
 import ProjectCard, { ProjectItem } from "./ProjectCard";
 
+const NOTION_PROJECT_URLS = {
+  mozzle: "https://app.notion.com/p/3a859549cbc080fb9c18f6c0dc7a1ef4",
+  bizCall: "https://app.notion.com/p/3a859549cbc08019aaeffdab0838edd4",
+  engineeringImpact: "https://app.notion.com/p/3b759549cbc080238458d6e584edad62",
+  pandyTalk: "https://app.notion.com/p/3a859549cbc080c9bf68c1155e975f7d",
+} as const;
+
 const projects: ProjectItem[] = [
   {
     title: "Mozzle (대용량 회원명부 관리 시스템 리팩토링)",
@@ -11,11 +18,11 @@ const projects: ProjectItem[] = [
         <strong className="text-text">대규모 렌더링 지연 및 구조 리팩토링:</strong> 대량의 회원 데이터를 동시 편집할 때 발생하는 렌더링 지연 문제와 비대해진 컴포넌트 구조 개선
       </>,
       <>
-        <strong className="text-text">가상화 기반 렌더링 성능 최적화:</strong> Chrome Performance로 Long Task 병목을 분석하고, React Virtuoso 기반 가상화 테이블을 적용하여 텍스트 입력 지연을 1330ms에서 29ms로 개선
+        <strong className="text-text">가상화 기반 렌더링 성능 최적화:</strong> Chrome Performance로 Long Task 병목을 분석하고, React Virtuoso 기반 가상화 테이블을 적용하여 초기 렌더링을 4.9초에서 0.14초, DOM Node를 54,458개에서 2,306~5,103개, 텍스트 입력 지연을 1,330ms에서 29ms로 개선
       </>
     ],
     tags: ["React", "CRA (Webpack)", "React Virtuoso", "Chrome Performance"],
-    link: process.env.NEXT_PUBLIC_NOTION_URL || "",
+    link: NOTION_PROJECT_URLS.mozzle,
     video: "Cj3J-v1gLcI",
     videoRatio: "16:9",
     featured: true,
@@ -26,14 +33,14 @@ const projects: ProjectItem[] = [
     theme: "emerald",
     description: [
       <>
-        <strong className="text-text">대용량 엑셀 다운로드 구조 개선:</strong> 엑셀 생성 책임을 서버에서 클라이언트로 분산하고 API 병렬 요청, Web Worker 및 ZIP 분할 압축을 적용하여 최대 80만 건까지 처리 범위 확장. 20.5만 건 기준 1차 개선 구조 대비 처리 시간을 150.8초에서 90.8초로 약 40% 단축
+        <strong className="text-text">대용량 엑셀 다운로드 구조 개선:</strong> 엑셀 생성 책임을 서버에서 클라이언트로 분산하고 API 병렬 요청, Web Worker 및 ZIP 분할 압축을 적용하여 최대 약 80만 건까지 처리 범위 확장. 20.5만 건 기준 1차 개선 구조 대비 처리 시간을 약 151초에서 91초로 약 40% 단축
       </>,
       <>
-        <strong className="text-text">랜딩페이지 SEO 및 성능 최적화:</strong> Next.js 기반 메타데이터, 시맨틱 마크업 및 LCP 이미지 로딩 구조를 개선하여 Lighthouse 성능(59 → 91) 및 SEO(91 → 100) 지표 개선. Search Console 한 달 비교 기준 노출수 1,290건에서 1,970건으로 53%, 클릭수 70건에서 80건으로 14% 증가
+        <strong className="text-text">랜딩페이지 SEO 및 성능 최적화:</strong> Next.js 기반 메타데이터, 시맨틱 마크업 및 LCP 이미지 로딩 구조를 개선하여 Lighthouse 성능(73 → 95) 및 SEO(91 → 100) 지표 개선. Search Console 한 달 비교 기준 노출수 1,290건에서 1,970건으로 53%, 클릭수 70건에서 80건으로 14% 증가
       </>
     ],
     tags: ["React", "SheetJS", "Web Worker", "ZIP Compression"],
-    link: process.env.NEXT_PUBLIC_NOTION_URL || "",
+    link: NOTION_PROJECT_URLS.bizCall,
     featured: true,
   },
   {
@@ -42,13 +49,14 @@ const projects: ProjectItem[] = [
     theme: "purple",
     description: [
       <>
-        <strong className="text-text">관리자 입력 폼 공통 컴포넌트 구조 제안:</strong> 기존 단순 JSX 나열 방식에서 JSON 기반의 선언적 스키마 폼 구조로 개선하여 폼 관련 코드(LOC) 20% 감소
+        <strong className="text-text">관리자 입력 폼 공통 컴포넌트 구조 제안:</strong> 기존 단순 JSX 나열 방식에서 JSON 기반의 선언적 스키마 폼 구조로 개선하여 폼 관련 코드(LOC) 약 20% 감소
       </>,
       <>
         <strong className="text-text">반응형 웹 레이아웃 개선:</strong> CSS Grid 기반 공통 구조를 적용하여 디자인 시안 변경 시 폼 구조 수정 없이 설정과 레이아웃 값 변경으로 대응
       </>
     ],
     tags: ["React", "Next.js (SSR)", "React Native", "Tailwind CSS"],
+    link: NOTION_PROJECT_URLS.engineeringImpact,
     featured: false,
   },
   {
@@ -64,7 +72,7 @@ const projects: ProjectItem[] = [
       </>
     ],
     tags: ["React Native (CLI)", "TypeScript", "SQLite", "Firebase", "OpenAI"],
-    link: process.env.NEXT_PUBLIC_NOTION_URL || "",
+    link: NOTION_PROJECT_URLS.pandyTalk,
     github: "https://github.com/951jth/pandytalk",
     video: "Kf3jksOo_W4",
     videoRatio: "9:16",

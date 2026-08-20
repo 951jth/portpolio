@@ -5,7 +5,7 @@ import Image from "next/image";
 import { ArrowRight, Download, Sparkles, ExternalLink } from "lucide-react";
 
 const RESUME_PDF_URL =
-  "https://docs.google.com/document/d/1aWGf-6Tgze3N-VzcidnTqmzwM9TtrAYkS2a5lZcDRWA/export?format=pdf";
+  "https://docs.google.com/document/d/1YL2iL-8USxK6GPAaV_Vu9de7bH8beh2NyM2F8STv_U8/export?format=pdf";
 const CAREER_DESCRIPTION_PDF_URL =
   "https://docs.google.com/document/d/1M0ppSNysFYF1NTTet08LGnsarapuSH_SCuOgxsU0V84/export?format=pdf";
 
