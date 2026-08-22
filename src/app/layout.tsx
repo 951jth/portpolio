@@ -42,10 +42,10 @@ export const metadata: Metadata = {
     locale: "ko_KR",
     images: [
       {
-        url: "/assets/images/profile.webp",
-        width: 800,
-        height: 800,
-        alt: "조세훈 프로필 사진",
+        url: "/assets/images/og-portfolio.png",
+        width: 1200,
+        height: 630,
+        alt: "조세훈 프론트엔드 엔지니어 포트폴리오",
       },
     ],
   },
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "조세훈 | 프론트엔드 엔지니어 포트폴리오",
     description: "성능 최적화와 사용자 경험 개선에 집중하는 프론트엔드 엔지니어 조세훈의 포트폴리오 웹사이트입니다.",
-    images: ["/assets/images/profile.webp"],
+    images: ["/assets/images/og-portfolio.png"],
   },
 };
 

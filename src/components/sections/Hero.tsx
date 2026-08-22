@@ -150,14 +150,15 @@ export default function Hero() {
                 <span>대용량 최적화 전문</span>
               </div>
               {/* Profile Image - Large and prominent! */}
-              <div className="relative w-full h-[220px] rounded-2xl overflow-hidden mb-6 border border-outer/40 shadow-sm bg-outer/30">
+              <div className="relative mb-6 flex h-[220px] w-full items-center justify-center overflow-hidden rounded-2xl border border-outer/40 bg-gradient-to-b from-accent-light/20 to-outer/30 shadow-sm">
                 <Image
-                  src="/assets/images/profile.webp"
+                  src="/assets/images/profile-resume.png"
                   alt="조세훈 프로필 사진"
-                  fill
+                  width={413}
+                  height={413}
                   priority
-                  sizes="(min-width: 768px) 296px, calc(100vw - 96px)"
-                  className="object-cover"
+                  sizes="(min-width: 640px) 204px, 190px"
+                  className="h-[190px] w-[190px] object-contain sm:h-[204px] sm:w-[204px]"
                 />
               </div>
 
