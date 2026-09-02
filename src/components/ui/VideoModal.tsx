@@ -12,17 +12,9 @@ export interface VideoModalProps {
 }
 
 export default function VideoModal({ videoId, isOpen, onClose, videoRatio = "16:9" }: VideoModalProps) {
-  const [mounted, setMounted] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
-      setIsLoading(true);
     } else {
       document.body.style.overflow = "unset";
     }
@@ -31,7 +23,7 @@ export default function VideoModal({ videoId, isOpen, onClose, videoRatio = "16:
     };
   }, [isOpen]);
 
-  if (!mounted || !isOpen) return null;
+  if (typeof document === "undefined" || !isOpen) return null;
 
   return createPortal(
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 sm:p-6 backdrop-blur-sm animate-in fade-in duration-200">
@@ -49,22 +41,32 @@ export default function VideoModal({ videoId, isOpen, onClose, videoRatio = "16:
           <X size={24} />
         </button>
         <div className={`w-full h-full relative bg-black rounded-xl overflow-hidden shadow-2xl ring-1 ring-white/10 flex items-center justify-center ${videoRatio === "16:9" ? "aspect-[16/9]" : "aspect-[9/16]"}`}>
-           {isLoading && (
-            <div className="absolute inset-0 flex items-center justify-center">
-              <Loader2 className="w-8 h-8 text-white/50 animate-spin" />
-            </div>
-          )}
-          <iframe
-            src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`}
-            title="YouTube video player"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-            className="absolute top-0 left-0 w-full h-full border-0"
-            onLoad={() => setIsLoading(false)}
-          />
+          <VideoFrame key={videoId} videoId={videoId} />
         </div>
       </div>
     </div>,
     document.body
+  );
+}
+
+function VideoFrame({ videoId }: { videoId: string }) {
+  const [isLoading, setIsLoading] = useState(true);
+
+  return (
+    <>
+      {isLoading && (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <Loader2 className="w-8 h-8 text-white/50 animate-spin" />
+        </div>
+      )}
+      <iframe
+        src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`}
+        title="YouTube video player"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowFullScreen
+        className="absolute top-0 left-0 w-full h-full border-0"
+        onLoad={() => setIsLoading(false)}
+      />
+    </>
   );
 }

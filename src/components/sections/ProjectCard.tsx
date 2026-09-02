@@ -10,6 +10,7 @@ export interface ProjectItem {
   description: React.ReactNode | React.ReactNode[];
   tags: string[];
   link?: string;
+  deepDiveLabel?: string;
   github?: string;
   video?: string;
   videoRatio?: "16:9" | "9:16";
@@ -99,9 +100,9 @@ export default function ProjectCard({ project }: { project: ProjectItem }) {
               size="sm"
               icon={<ArrowUpRight size={14} />}
               iconPosition="right"
-              aria-label={`${project.title} 상세 이력서 및 엔지니어링 로그 방문 (새 창 이동)`}
+              aria-label={`${project.title} 문제해결 과정 방문 (새 창 이동)`}
             >
-              상세 로그 보기
+              {project.deepDiveLabel || "개선 과정 보기"}
             </Button>}
             {project.github && <Button
               href={project.github}
