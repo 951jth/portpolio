@@ -8,6 +8,9 @@ const RESUME_PDF_URL =
   "https://docs.google.com/document/d/1YL2iL-8USxK6GPAaV_Vu9de7bH8beh2NyM2F8STv_U8/export?format=pdf";
 const CAREER_DESCRIPTION_PDF_URL =
   "https://docs.google.com/document/d/1M0ppSNysFYF1NTTet08LGnsarapuSH_SCuOgxsU0V84/export?format=pdf";
+const NOTION_INDEX_URL =
+  process.env.NEXT_PUBLIC_NOTION_URL ||
+  "https://app.notion.com/p/3a859549cbc080bcb9f6c0dc7a1ef4";
 
 export default function Hero() {
   return (
@@ -53,7 +56,7 @@ export default function Hero() {
           <FadeIn direction="up" delay={0.1}>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-light/50 text-accent-deep font-semibold text-xs border border-primary/20 w-fit mx-auto lg:mx-0">
               <Sparkles size={14} className="animate-pulse" />
-              <span>성능 최적화에 집중하는 6년 차 프론트엔드 엔지니어</span>
+              <span>관리자 편집 UI의 성능을 개선하는 6년 차 프론트엔드 엔지니어</span>
             </div>
           </FadeIn>
 
@@ -69,9 +72,9 @@ export default function Hero() {
 
           <FadeIn direction="up" delay={0.3}>
             <p className="font-pretendard text-text-secondary text-base sm:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">
-              안녕하세요, 조세훈입니다. 프론트엔드 성능 병목 현상과 
-              대용량 데이터 처리 문제를 구조적으로 해결하여, 
-              쾌적한 웹 환경을 제공하는 6년 차 엔지니어입니다.
+              안녕하세요, 조세훈입니다. 관리자 화면에서 입력이 느려지고
+              흐름이 끊기는 지점을 찾아, 측정 결과를 바탕으로 UI 구조를
+              다시 설계해 온 6년 차 엔지니어입니다.
             </p>
           </FadeIn>
 
@@ -94,7 +97,7 @@ export default function Hero() {
                 프로젝트 보기
               </Button>
               <Button
-                href={process.env.NEXT_PUBLIC_NOTION_URL || ""}
+                href={NOTION_INDEX_URL}
                 variant="outline"
                 size="md"
                 target="_blank"
@@ -102,7 +105,7 @@ export default function Hero() {
                 icon={<ExternalLink size={18} />}
                 aria-label="조세훈 문제해결 상세 로그 (새 창 이동)"
               >
-                문제해결 상세
+                성능 개선 과정 보기
               </Button>
             </div>
           </FadeIn>
@@ -147,7 +150,7 @@ export default function Hero() {
               <div className="absolute top-0 right-0 w-24 h-24 bg-accent-light/30 rounded-bl-full -z-10" />
               <div className="hidden lg:flex absolute top-4 left-4 z-20 bg-secondary text-secondary-foreground px-3 py-2 rounded-2xl shadow-lg border border-secondary-foreground/20 text-xs font-semibold items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-secondary-foreground animate-ping" />
-                <span>대용량 최적화 전문</span>
+                <span>편집 UI 최적화</span>
               </div>
               {/* Profile Image - Large and prominent! */}
               <div className="relative mb-6 flex h-[220px] w-full items-center justify-center overflow-hidden rounded-2xl border border-outer/40 bg-gradient-to-b from-accent-light/20 to-outer/30 shadow-sm">
@@ -184,7 +187,7 @@ export default function Hero() {
                 <div className="flex justify-between pb-1">
                   <span>Motto</span>
                   <span className="italic text-text font-medium leading-relaxed">
-                    &quot;성능 최적화를 통해 더 나은 사용자 경험을 만듭니다.&quot;
+                    &quot;사용자가 기다리는 시간을 줄이는 프론트엔드를 만듭니다.&quot;
                   </span>
                 </div>
               </div>

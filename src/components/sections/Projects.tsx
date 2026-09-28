@@ -10,12 +10,12 @@ const NOTION_PROJECT_URLS = {
 
 const projects: ProjectItem[] = [
   {
-    title: "Mozzle (대용량 회원명부 관리 시스템 리팩토링)",
+    title: "Mozzle - 회원명부 편집 UI 성능 리팩토링",
     category: "B2B Enterprise Admin Suite",
     theme: "blue",
     description: [
       <>
-        <strong className="text-text">대규모 렌더링 지연 및 구조 리팩토링:</strong> 대량의 회원 데이터를 동시 편집할 때 발생하는 렌더링 지연 문제와 비대해진 컴포넌트 구조 개선
+        <strong className="text-text">관리자 편집 UI 렌더링 병목 개선:</strong> 회원명부에서 다수 Row를 조회·수정할 때 발생하는 렌더링 지연 문제와 비대해진 컴포넌트 구조 개선
       </>,
       <>
         <strong className="text-text">가상화 기반 렌더링 성능 최적화:</strong> Chrome Performance로 병목을 분석하고 React Virtuoso 기반 가상화를 적용해 3,000건 스크롤 시 발생하는 Long Task를 19건에서 1건으로 감소시켰습니다. 이를 통해 초기 UI 렌더링을 4.9초에서 0.14초, DOM Node를 54,458개에서 2,306~5,103개, 텍스트 입력 지연을 1,330ms에서 29ms로 단축했습니다.
@@ -23,6 +23,7 @@ const projects: ProjectItem[] = [
     ],
     tags: ["React", "CRA (Webpack)", "React Virtuoso", "Chrome Performance"],
     link: NOTION_PROJECT_URLS.mozzle,
+    deepDiveLabel: "편집 UI 개선 과정 보기",
     video: "Cj3J-v1gLcI",
     videoRatio: "16:9",
     featured: true,
@@ -41,6 +42,7 @@ const projects: ProjectItem[] = [
     ],
     tags: ["React", "SheetJS", "Web Worker", "ZIP Compression"],
     link: NOTION_PROJECT_URLS.bizCall,
+    deepDiveLabel: "Excel 처리 구조 보기",
     featured: true,
   },
   {
@@ -57,6 +59,7 @@ const projects: ProjectItem[] = [
     ],
     tags: ["React", "Next.js (SSR)", "React Native", "Tailwind CSS"],
     link: NOTION_PROJECT_URLS.engineeringImpact,
+    deepDiveLabel: "폼 구조 개선 과정 보기",
     featured: false,
   },
   {
@@ -73,6 +76,7 @@ const projects: ProjectItem[] = [
     ],
     tags: ["React Native (CLI)", "TypeScript", "SQLite", "Firebase", "OpenAI"],
     link: NOTION_PROJECT_URLS.pandyTalk,
+    deepDiveLabel: "Offline-First 설계 보기",
     github: "https://github.com/951jth/pandytalk",
     video: "Kf3jksOo_W4",
     videoRatio: "9:16",
@@ -94,7 +98,7 @@ export default function Projects() {
           <FadeIn direction="up" delay={0.1}>
             <div className="w-16 h-1 bg-primary mx-auto rounded-full mb-4" />
             <p className="font-pretendard text-text-secondary text-sm sm:text-base max-w-2xl mx-auto md:whitespace-nowrap">
-              성능을 측정하고 구조를 개선하여 사용자 경험을 개선한 핵심 작업들입니다.
+              관리자 편집 UI, 결제 플로우, 브라우저 연산 처리처럼 실제 사용 흐름의 병목을 개선한 작업들입니다.
             </p>
           </FadeIn>
         </div>
