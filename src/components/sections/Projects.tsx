@@ -18,7 +18,7 @@ const projects: ProjectItem[] = [
         <strong className="text-text">관리자 편집 UI 렌더링 병목 개선:</strong> 회원명부에서 다수 Row를 조회·수정할 때 발생하는 렌더링 지연 문제와 비대해진 컴포넌트 구조 개선
       </>,
       <>
-        <strong className="text-text">가상화 기반 렌더링 성능 최적화:</strong> Chrome Performance로 병목을 분석하고 React Virtuoso 기반 가상화를 적용해 3,000건 스크롤 시 발생하는 Long Task를 19건에서 1건으로 감소시켰습니다. 이를 통해 초기 UI 렌더링을 4.9초에서 0.14초, DOM Node를 54,458개에서 2,306~5,103개, 텍스트 입력 지연을 1,330ms에서 29ms로 단축했습니다.
+        <strong className="text-text">가상화 기반 렌더링 성능 최적화:</strong> Chrome Performance로 병목을 분석하고 React Virtuoso 기반 가상화를 적용했습니다. 초기 UI 렌더링을 1.79초에서 0.20초, DOM Node를 64,458개에서 2,306~5,103개, 텍스트 입력 지연을 533.55ms에서 17.98ms로 단축했습니다. 참고 측정으로 3,000건 수동 스크롤에서 Long Task가 19건에서 1건으로 감소하는 것을 관찰했으나, 조작 편차가 있어 개선 경향 확인용으로 활용했습니다.
       </>
     ],
     tags: ["React", "CRA (Webpack)", "React Virtuoso", "Chrome Performance"],
